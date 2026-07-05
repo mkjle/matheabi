@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vektorgeometrie – mündliches Abitur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  chtml: { scale: 1.0 }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js" id="mathjax-script"></script>
+<style>
+  :root{
+    --paper:#FAFBFC; --grid:#E7ECF3; --ink:#1A2B47; --body:#2D3648;
+    --blue:#2568A8; --blue-tint:#EAF1FA; --teal:#2F7566; --teal-tint:#E7F3EF;
+    --amber:#A9752E; --amber-tint:#FBF3E7; --line:#D9E1EA;
+    --mono:'IBM Plex Mono',monospace; --serif:'Source Serif 4',Georgia,serif; --disp:'Space Grotesk',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/28px 28px,
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/28px 28px,
+      var(--paper);
+    color:var(--body); font-family:var(--serif); line-height:1.62; font-size:16.5px;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:740px; margin:0 auto; padding:1.6rem 1.1rem 4rem;}
+  header.top{padding-top:0.4rem;}
+  .eyebrow{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.14em; color:var(--blue);
+    text-transform:uppercase; display:block; margin-bottom:0.5rem;
+  }
+  h1{
+    font-family:var(--disp); font-weight:700; color:var(--ink); font-size:1.85rem;
+    margin:0 0 0.35rem; letter-spacing:-0.01em; line-height:1.15;
+  }
+  .sub{color:var(--body); font-size:1.02rem; margin:0 0 1.1rem; max-width:56ch;}
+  .intro-note{
+    font-size:0.96rem; border-left:3px solid var(--blue); padding:0.55rem 0 0.55rem 0.9rem;
+    background:rgba(37,104,168,0.045); border-radius:0 6px 6px 0; margin-bottom:1.6rem;
+  }
+  .intro-note strong{color:var(--ink);}
+  table.checklist{
+    width:100%; border-collapse:collapse; font-size:0.86rem; margin-bottom:1.9rem;
+    background:#fff; border:1px solid var(--line); border-radius:8px; overflow:hidden;
+  }
+  table.checklist caption{
+    font-family:var(--disp); font-weight:600; font-size:0.78rem; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--ink); text-align:left; padding:0.7rem 0.8rem 0.5rem;
+    background:#fff;
+  }
+  table.checklist th{
+    font-family:var(--mono); font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase;
+    color:#6b7690; text-align:left; padding:0.4rem 0.8rem; border-bottom:1px solid var(--line);
+  }
+  table.checklist td{
+    padding:0.5rem 0.8rem; border-bottom:1px solid var(--line); vertical-align:top;
+  }
+  table.checklist tr:last-child td{border-bottom:none;}
+  table.checklist td.num{font-family:var(--mono); color:var(--blue); white-space:nowrap;}
+  table.checklist td.ref{font-family:var(--mono); color:var(--amber); white-space:nowrap; font-size:0.8rem;}
+  nav.jump{display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:2.2rem;}
+  nav.jump a{
+    font-family:var(--mono); font-size:0.78rem; color:var(--ink); text-decoration:none;
+    border:1px solid var(--line); background:#fff; padding:0.4rem 0.7rem; border-radius:20px;
+  }
+  nav.jump a:hover{border-color:var(--blue); color:var(--blue);}
+  section.aufgabe{
+    background:#fff; border:1px solid var(--line); border-radius:12px;
+    padding:1.4rem 1.3rem 1.6rem; margin-bottom:1.8rem; scroll-margin-top:1rem;
+  }
+  .aufgabe-head .eyebrow{margin-bottom:0.3rem;}
+  section.aufgabe h2{
+    font-family:var(--disp); font-weight:600; color:var(--ink); font-size:1.32rem; margin:0 0 0.7rem;
+  }
+  p.context{font-size:0.98rem; margin:0 0 1.2rem; padding-bottom:1.1rem; border-bottom:1px dashed var(--line);}
+  .teil{margin-bottom:1.35rem;}
+  .teil:last-of-type{margin-bottom:0.4rem;}
+  .teil-head{display:flex; align-items:center; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.45rem;}
+  .teil-letter{
+    font-family:var(--disp); font-weight:700; color:#fff; background:var(--ink);
+    width:1.55rem; height:1.55rem; border-radius:50%; display:inline-flex; align-items:center;
+    justify-content:center; font-size:0.78rem; flex:none;
+  }
+  .tag{
+    font-family:var(--mono); font-size:0.66rem; padding:0.16rem 0.45rem; background:var(--blue-tint);
+    color:var(--blue); border-radius:4px; border:1px solid rgba(37,104,168,0.22); white-space:nowrap;
+  }
+  p.aufgabenstellung{margin:0 0 0.6rem; font-size:0.99rem;}
+  .pt{font-family:var(--mono); font-size:0.94em; color:var(--ink);}
+  details.solution{border:1px solid var(--line); border-radius:8px; background:#fff; margin-top:0.5rem;}
+  details.solution summary{
+    cursor:pointer; list-style:none; padding:0.55rem 0.9rem; font-family:var(--disp); font-weight:600;
+    font-size:0.82rem; letter-spacing:0.02em; color:var(--teal); background:var(--teal-tint);
+    border-radius:8px; display:flex; align-items:center; gap:0.5rem; user-select:none;
+  }
+  details.solution summary::-webkit-details-marker{display:none;}
+  details.solution summary::marker{content:'';}
+  details.solution summary::before{content:'▸'; transition:transform 0.15s ease; font-size:0.75rem;}
+  details.solution[open] summary::before{transform:rotate(90deg);}
+  details.solution[open] summary{border-radius:8px 8px 0 0;}
+  details.solution summary .hide{display:none;}
+  details.solution[open] summary .show{display:none;}
+  details.solution[open] summary .hide{display:inline;}
+  .sol-body{padding:0.95rem 1.05rem 1.1rem; font-size:0.95rem;}
+  .sol-body p{margin:0 0 0.65rem;}
+  .sol-body p:last-child{margin-bottom:0;}
+  .note{
+    font-size:0.88rem; background:var(--amber-tint); border-left:3px solid var(--amber);
+    padding:0.5rem 0.8rem; border-radius:0 6px 6px 0; margin-top:0.7rem;
+  }
+  .result{
+    font-family:var(--mono); background:var(--blue-tint); border-radius:6px; padding:0.5rem 0.75rem;
+    display:inline-block; margin-top:0.2rem; font-size:0.92rem; color:var(--ink);
+  }
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%;}
+  .sketch-box{margin-top:0.6rem;}
+  .sketch-box svg{width:100%; max-width:380px; height:auto; display:block; margin:0 auto;}
+  .backlink{
+    display:inline-block; margin-top:0.6rem; font-family:var(--mono); font-size:0.76rem;
+    color:#8592a8; text-decoration:none;
+  }
+  .backlink:hover{color:var(--blue);}
+  footer{text-align:center; font-size:0.85rem; color:#8592a8; padding-top:0.8rem;}
+  @media (max-width:480px){
+    h1{font-size:1.55rem;}
+    section.aufgabe{padding:1.1rem 0.9rem 1.3rem;}
+    table.checklist{font-size:0.78rem;}
+    table.checklist td, table.checklist th{padding:0.4rem 0.5rem;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top" id="top">
+  <span class="eyebrow">Mündliches Abitur · Mathematik · Analytische Geometrie</span>
+  <h1>Vektorgeometrie</h1>
+  <p class="sub">Fünf zusammenhängende Aufgabenkomplexe, die zusammen alle 15 von dir genannten Anforderungen abdecken.</p>
+  <div class="intro-note">
+    Das <strong>Skalarprodukt</strong> steckt bewusst nicht als eigene Mini-Aufgabe drin, sondern dort, wo es in echten Prüfungen auch auftaucht: bei Winkeln, Abständen und Orthogonalitätsbedingungen. Genauso ist der <strong>Betrag</strong> in mehrere Teilaufgaben eingebettet. Alle anderen Themen haben eine klar erkennbare eigene Teilaufgabe. Versuch jede Teilaufgabe zuerst selbst — sprich deinen Lösungsweg dabei laut mit, denn genau das wird in der mündlichen Prüfung verlangt, nicht nur das Endergebnis.
+  </div>
+
+  <table class="checklist">
+    <caption>Abdeckung deiner 15 Anforderungen</caption>
+    <tr><th>§</th><th>Thema</th><th>Aufgabe</th></tr>
+    <tr><td class="num">01</td><td>Skalarprodukt</td><td class="ref">3a · 3d · 3e · 5b</td></tr>
+    <tr><td class="num">02</td><td>Kreuzprodukt</td><td class="ref">1d · 2c · 3b · 5a · 5b</td></tr>
+    <tr><td class="num">03</td><td>Linearkombination</td><td class="ref">1a</td></tr>
+    <tr><td class="num">04</td><td>Betrag eines Vektors</td><td class="ref">1b · 3a · 3b · 4a · 4b</td></tr>
+    <tr><td class="num">05</td><td>Gerade durch 2 Punkte</td><td class="ref">1b · 2a</td></tr>
+    <tr><td class="num">06</td><td>Ebene durch 3 Punkte</td><td class="ref">1c</td></tr>
+    <tr><td class="num">07</td><td>Spurpunkte & Skizze</td><td class="ref">1e</td></tr>
+    <tr><td class="num">08</td><td>Lage E–E / E–g / g–g</td><td class="ref">2a · 2b · 2c</td></tr>
+    <tr><td class="num">09</td><td>Abstände und Winkel</td><td class="ref">3a – 3e</td></tr>
+    <tr><td class="num">10</td><td>Spiegelung</td><td class="ref">4a · 4b</td></tr>
+    <tr><td class="num">11</td><td>Ebenengleichung umwandeln</td><td class="ref">1d · 5a</td></tr>
+    <tr><td class="num">12</td><td>Gleichung aus Eigenschaften</td><td class="ref">5b</td></tr>
+    <tr><td class="num">13</td><td>Geom. Bedeutung Skalar-/Kreuzprodukt</td><td class="ref">3f</td></tr>
+    <tr><td class="num">14</td><td>Schnittgerade von Ebenen</td><td class="ref">2c</td></tr>
+    <tr><td class="num">15</td><td>Abstand Punkt-Gerade</td><td class="ref">3b</td></tr>
+  </table>
+
+  <nav class="jump">
+    <a href="#a1">Aufgabe 1 · Pyramide</a>
+    <a href="#a2">Aufgabe 2 · Lage</a>
+    <a href="#a3">Aufgabe 3 · Abstände & Winkel</a>
+    <a href="#a4">Aufgabe 4 · Spiegelung</a>
+    <a href="#a5">Aufgabe 5 · Gleichungen</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ========================= AUFGABE 1 ========================= -->
+<section class="aufgabe" id="a1">
+  <div class="aufgabe-head">
+    <span class="eyebrow">Aufgabe 01</span>
+    <h2>Die Pyramide über dem Dreieck ABC</h2>
+  </div>
+  <p class="context">Gegeben sind die Punkte <span class="pt">A(1|2|1)</span>, <span class="pt">B(4|0|1)</span>, <span class="pt">C(-1|2|2)</span> und <span class="pt">D(3|3|3)</span>.</p>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">a</span><span class="tag">§03 Linearkombination</span></div>
+    <p class="aufgabenstellung">Untersuchen Sie rechnerisch, ob sich der Vektor \(\overrightarrow{AD}\) als Linearkombination von \(\overrightarrow{AB}\) und \(\overrightarrow{AC}\) darstellen lässt, und interpretieren Sie das Ergebnis geometrisch.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Zunächst die drei Vektoren:
+        \[\overrightarrow{AB}=\begin{pmatrix}3\\-2\\0\end{pmatrix},\quad \overrightarrow{AC}=\begin{pmatrix}-2\\0\\1\end{pmatrix},\quad \overrightarrow{AD}=\begin{pmatrix}2\\1\\2\end{pmatrix}\]</p>
+        <p>Ansatz \(r\cdot\overrightarrow{AB}+s\cdot\overrightarrow{AC}=\overrightarrow{AD}\) liefert das Gleichungssystem
+        \[3r-2s=2,\qquad -2r=1,\qquad r+s=2\]
+        Aus Gleichung II folgt \(r=-\tfrac12\), eingesetzt in I ergibt \(s=-\tfrac74\). Setzt man beide Werte in Gleichung III ein: \(-\tfrac12-\tfrac74=-\tfrac94\neq 2\) — Widerspruch.</p>
+        <p>Das System ist nicht lösbar, also lässt sich \(\overrightarrow{AD}\) <em>nicht</em> als Linearkombination von \(\overrightarrow{AB}\) und \(\overrightarrow{AC}\) darstellen.</p>
+        <div class="result">⇒ D liegt nicht in der von A, B, C aufgespannten Ebene — ABCD ist ein echter, dreidimensionaler Körper (eine Pyramide), keine ebene Figur.</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">b</span><span class="tag">§05 Gerade durch 2 Punkte</span><span class="tag">§04 Betrag</span></div>
+    <p class="aufgabenstellung">Stellen Sie eine Gleichung der Geraden g durch A und B in Parameterform auf und berechnen Sie \(|\overrightarrow{AB}|\).</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Mit Stützvektor A und Richtungsvektor \(\overrightarrow{AB}\):
+        \[g:\ \vec x=\begin{pmatrix}1\\2\\1\end{pmatrix}+t\begin{pmatrix}3\\-2\\0\end{pmatrix},\quad t\in\mathbb{R}\]</p>
+        <p>Der Betrag: \(|\overrightarrow{AB}|=\sqrt{3^2+(-2)^2+0^2}=\sqrt{13}\approx 3{,}61\ \text{LE}\).</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">c</span><span class="tag">§06 Ebene durch 3 Punkte</span></div>
+    <p class="aufgabenstellung">Stellen Sie eine Gleichung der Ebene E durch A, B und C in Parameterform auf.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>\[E:\ \vec x=\begin{pmatrix}1\\2\\1\end{pmatrix}+r\begin{pmatrix}3\\-2\\0\end{pmatrix}+s\begin{pmatrix}-2\\0\\1\end{pmatrix},\quad r,s\in\mathbb{R}\]</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">d</span><span class="tag">§02 Kreuzprodukt</span><span class="tag">§11 Umwandeln</span></div>
+    <p class="aufgabenstellung">Wandeln Sie die Parameterform von E mithilfe des Kreuzprodukts in die Koordinatenform um.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Normalenvektor über das Kreuzprodukt der Spannvektoren:
+        \[\vec n=\overrightarrow{AB}\times\overrightarrow{AC}=\begin{pmatrix}3\\-2\\0\end{pmatrix}\times\begin{pmatrix}-2\\0\\1\end{pmatrix}=\begin{pmatrix}(-2)(1)-0\cdot0\\0\cdot(-2)-3\cdot1\\3\cdot0-(-2)(-2)\end{pmatrix}=\begin{pmatrix}-2\\-3\\-4\end{pmatrix}\]</p>
+        <p>Gleichwertig lässt sich \(\vec n=\begin{pmatrix}2\\3\\4\end{pmatrix}\) verwenden (entgegengesetzte Richtung, gleiche Ebene). Normalenform: \(\vec n\cdot(\vec x-A)=0\). Ausmultipliziert:
+        \[2(x_1-1)+3(x_2-2)+4(x_3-1)=0 \ \Longrightarrow\ E:\ 2x_1+3x_2+4x_3=12\]</p>
+        <p>Probe: A: \(2+6+4=12\) ✓, B: \(8+0+4=12\) ✓, C: \(-2+6+8=12\) ✓. Punkt D liefert \(6+9+12=27\neq 12\) — bestätigt noch einmal Teilaufgabe a.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">e</span><span class="tag">§07 Spurpunkte & Skizze</span></div>
+    <p class="aufgabenstellung">Berechnen Sie die Spurpunkte von E und skizzieren Sie die Ebene im Koordinatensystem.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Spurpunkte entstehen, indem jeweils zwei Koordinaten null gesetzt werden:
+        \(x_2=x_3=0:\ 2x_1=12\Rightarrow x_1=6\); \(x_1=x_3=0:\ 3x_2=12\Rightarrow x_2=4\); \(x_1=x_2=0:\ 4x_3=12\Rightarrow x_3=3\).</p>
+        <div class="result">S₁(6|0|0) · S₂(0|4|0) · S₃(0|0|3)</div>
+        <p>Verbindet man die drei Spurpunkte, erhält man das Spurdreieck — der im ersten Oktanten sichtbare Ausschnitt der Ebene:</p>
+        <div class="sketch-box">
+          <svg viewBox="0 0 380 360" role="img" aria-label="Skizze: Koordinatenachsen mit Spurdreieck von E">
+            <defs>
+              <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#1A2B47"/>
+              </marker>
+            </defs>
+            <line x1="150" y1="250" x2="72" y2="328" stroke="#1A2B47" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <line x1="150" y1="250" x2="304" y2="250" stroke="#1A2B47" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <line x1="150" y1="250" x2="150" y2="126" stroke="#1A2B47" stroke-width="1.5" marker-end="url(#arrow)"/>
+            <text x="58" y="345" font-family="IBM Plex Mono" font-size="13" fill="#1A2B47">x₁</text>
+            <text x="310" y="255" font-family="IBM Plex Mono" font-size="13" fill="#1A2B47">x₂</text>
+            <text x="156" y="120" font-family="IBM Plex Mono" font-size="13" fill="#1A2B47">x₃</text>
+            <polygon points="86,314 270,250 150,160" fill="#2568A8" fill-opacity="0.15" stroke="#2568A8" stroke-width="2"/>
+            <circle cx="86" cy="314" r="4.5" fill="#A9752E"/>
+            <circle cx="270" cy="250" r="4.5" fill="#A9752E"/>
+            <circle cx="150" cy="160" r="4.5" fill="#A9752E"/>
+            <circle cx="150" cy="250" r="3" fill="#1A2B47"/>
+            <text x="30" y="333" font-family="IBM Plex Mono" font-size="12" fill="#A9752E">S₁(6|0|0)</text>
+            <text x="276" y="244" font-family="IBM Plex Mono" font-size="12" fill="#A9752E">S₂(0|4|0)</text>
+            <text x="156" y="154" font-family="IBM Plex Mono" font-size="12" fill="#A9752E">S₃(0|0|3)</text>
+            <text x="126" y="270" font-family="IBM Plex Mono" font-size="11" fill="#1A2B47">O</text>
+          </svg>
+        </div>
+        <p style="font-size:0.85rem; color:#6b7690;">(Schrägbild: x₂- und x₃-Achse unverzerrt, x₁-Achse in 45° mit Verkürzungsfaktor 0,5 — die übliche Konvention.)</p>
+      </div>
+    </details>
+  </div>
+  <a class="backlink" href="#top">↑ Zur Übersicht</a>
+</section>
+
+<!-- ========================= AUFGABE 2 ========================= -->
+<section class="aufgabe" id="a2">
+  <div class="aufgabe-head">
+    <span class="eyebrow">Aufgabe 02</span>
+    <h2>Gegenseitige Lage — drei Szenarien</h2>
+  </div>
+  <p class="context">Diese Aufgabe prüft alle drei Grundtypen der gegenseitigen Lage in je einem eigenständigen Szenario.</p>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">a</span><span class="tag">§05 Gerade durch 2 Punkte</span><span class="tag">§08 Lage g–g</span></div>
+    <p class="aufgabenstellung">Die Gerade g verläuft durch <span class="pt">P₁(1|1|4)</span> und <span class="pt">P₂(3|2|3)</span>, die Gerade h durch <span class="pt">Q₁(3|0|6)</span> und <span class="pt">Q₂(4|2|3)</span>. Untersuchen Sie die gegenseitige Lage von g und h.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Richtungsvektoren: \(\vec u=\overrightarrow{P_1P_2}=\begin{pmatrix}2\\1\\-1\end{pmatrix}\), \(\vec v=\overrightarrow{Q_1Q_2}=\begin{pmatrix}1\\2\\-3\end{pmatrix}\). Diese sind keine Vielfachen voneinander (z. B. \(2/1\neq1/2\)) — g und h sind nicht parallel.</p>
+        <p>Gleichsetzen: \(\begin{pmatrix}1\\1\\4\end{pmatrix}+t\begin{pmatrix}2\\1\\-1\end{pmatrix}=\begin{pmatrix}3\\0\\6\end{pmatrix}+s\begin{pmatrix}1\\2\\-3\end{pmatrix}\) liefert
+        \[\text{I: } 1+2t=3+s \qquad \text{II: } 1+t=2s \qquad \text{III: } 4-t=6-3s\]</p>
+        <p>Aus II und III: \(t=2s-1\) und \(t=3s-2\), also \(2s-1=3s-2\Rightarrow s=1,\ t=1\). <strong>Wichtig:</strong> Das ist erst eine Lösung von zwei der drei Gleichungen — jetzt Probe mit I: \(1+2(1)=3\), aber \(s+3=1+3=4\). Da \(3\neq 4\), ist das Gesamtsystem nicht lösbar.</p>
+        <div class="result">⇒ g und h sind windschief.</div>
+        <p class="note">Typische Prüfungsfalle: Wer nur zwei der drei Gleichungen löst, findet scheinbar einen Schnittpunkt (bei t=1 läge man auf g im Punkt (3|2|3), bei s=1 auf h im Punkt (4|2|3) — verschiedene Punkte!). Erst die dritte Gleichung entlarvt den Widerspruch. Windschiefe Geraden schneiden sich nicht, sind aber auch nicht parallel.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">b</span><span class="tag">§08 Lage E–g</span></div>
+    <p class="aufgabenstellung">Gegeben sind \(E_1: 3x_1+x_2-2x_3=4\) und \(k:\ \vec x=\begin{pmatrix}1\\2\\-1\end{pmatrix}+s\begin{pmatrix}2\\-1\\1\end{pmatrix}\). Untersuchen Sie die gegenseitige Lage von \(E_1\) und k und bestimmen Sie ggf. den Schnittpunkt.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Richtungsvektor von k mit Normalenvektor von \(E_1\) multiplizieren: \(\begin{pmatrix}2\\-1\\1\end{pmatrix}\cdot\begin{pmatrix}3\\1\\-2\end{pmatrix}=6-1-2=3\neq0\). Da das Skalarprodukt ungleich null ist, ist k nicht parallel zu \(E_1\) — es gibt genau einen Schnittpunkt.</p>
+        <p>Einsetzen der Geradenkoordinaten in die Ebenengleichung: \(3(1+2s)+(2-s)-2(-1+s)=4 \Rightarrow 3+6s+2-s+2-2s=4 \Rightarrow 7+3s=4 \Rightarrow s=-1\).</p>
+        <div class="result">Schnittpunkt: (-1|3|-2)</div>
+        <p class="note">Wäre das Skalarprodukt null gewesen, hätte man zusätzlich prüfen müssen, ob der Stützpunkt von k die Ebenengleichung erfüllt: Falls ja, liegt k vollständig in \(E_1\); falls nein, ist k echt parallel zu \(E_1\) (kein Schnittpunkt).</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">c</span><span class="tag">§08 Lage E–E</span><span class="tag">§14 Schnittgerade</span></div>
+    <p class="aufgabenstellung">Gegeben sind \(E_2: x_1+2x_2-x_3=3\) und \(E_3: 2x_1-x_2+x_3=1\). Zeigen Sie, dass sich die Ebenen schneiden, und bestimmen Sie eine Gleichung der Schnittgeraden.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Die Normalenvektoren \(\vec n_2=\begin{pmatrix}1\\2\\-1\end{pmatrix}\) und \(\vec n_3=\begin{pmatrix}2\\-1\\1\end{pmatrix}\) sind keine Vielfachen voneinander — die Ebenen sind nicht parallel, sie schneiden sich also in einer Geraden.</p>
+        <p>Man setzt \(x_3=t\) und löst das verbleibende \(2\times2\)-System \(x_1+2x_2=3+t\), \(2x_1-x_2=1-t\) nach \(x_1,x_2\) auf. Das ergibt \(x_1=1-\tfrac t5\), \(x_2=1+\tfrac{3t}5\). Für \(t=0\) erhält man den Punkt \((1|1|0)\).</p>
+        <p>Der Richtungsvektor der Schnittgeraden steht senkrecht auf beiden Normalenvektoren und lässt sich daher eleganter direkt über das Kreuzprodukt bestimmen:
+        \[\vec n_2\times\vec n_3=\begin{pmatrix}1\\2\\-1\end{pmatrix}\times\begin{pmatrix}2\\-1\\1\end{pmatrix}=\begin{pmatrix}2\cdot1-(-1)(-1)\\(-1)\cdot2-1\cdot1\\1\cdot(-1)-2\cdot2\end{pmatrix}=\begin{pmatrix}1\\-3\\-5\end{pmatrix}\]</p>
+        <div class="result">Schnittgerade: \(\vec x=\begin{pmatrix}1\\1\\0\end{pmatrix}+r\begin{pmatrix}1\\-3\\-5\end{pmatrix}\)</div>
+        <p class="note">Wären die Normalenvektoren Vielfache voneinander gewesen, hätte man zusätzlich die Konstanten vergleichen müssen: gleiches Verhältnis ⇒ identische Ebenen, sonst echt parallel.</p>
+      </div>
+    </details>
+  </div>
+  <a class="backlink" href="#top">↑ Zur Übersicht</a>
+</section>
+
+<!-- ========================= AUFGABE 3 ========================= -->
+<section class="aufgabe" id="a3">
+  <div class="aufgabe-head">
+    <span class="eyebrow">Aufgabe 03</span>
+    <h2>Abstände, Winkel und ihre Bedeutung</h2>
+  </div>
+  <p class="context">Diese Aufgabe greift bewusst auf Objekte aus Aufgabe 1 und 2 zurück — genau wie im echten Abitur Teilaufgaben oft aufeinander aufbauen.</p>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">a</span><span class="tag">§01 Skalarprodukt</span><span class="tag">§09 Abstände & Winkel</span></div>
+    <p class="aufgabenstellung">Berechnen Sie den Abstand des Punktes <span class="pt">P(5|5|5)</span> von der Ebene E aus Aufgabe 1.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Mit der Hesse'schen Normalform \(d=\dfrac{|\vec n\cdot P-d_E|}{|\vec n|}\), wobei \(\vec n=\begin{pmatrix}2\\3\\4\end{pmatrix}\) und \(d_E=12\):
+        \[d=\frac{|2\cdot5+3\cdot5+4\cdot5-12|}{\sqrt{2^2+3^2+4^2}}=\frac{|45-12|}{\sqrt{29}}=\frac{33}{\sqrt{29}}=\frac{33\sqrt{29}}{29}\]</p>
+        <div class="result">d ≈ 6,13 LE</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">b</span><span class="tag">§02 Kreuzprodukt</span><span class="tag">§04 Betrag</span><span class="tag">§15 Abstand Punkt-Gerade</span></div>
+    <p class="aufgabenstellung">Gegeben ist \(m:\ \vec x=\begin{pmatrix}2\\0\\1\end{pmatrix}+t\begin{pmatrix}1\\2\\2\end{pmatrix}\). Berechnen Sie den Abstand des Punktes <span class="pt">R(4|3|2)</span> von m.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Vektor vom Stützpunkt zu R: \(\overrightarrow{RA}=\begin{pmatrix}2-4\\0-3\\1-2\end{pmatrix}=\begin{pmatrix}-2\\-3\\-1\end{pmatrix}\). Kreuzprodukt mit dem Richtungsvektor:
+        \[\overrightarrow{RA}\times\vec u=\begin{pmatrix}-2\\-3\\-1\end{pmatrix}\times\begin{pmatrix}1\\2\\2\end{pmatrix}=\begin{pmatrix}(-3)(2)-(-1)(2)\\(-1)(1)-(-2)(2)\\(-2)(2)-(-3)(1)\end{pmatrix}=\begin{pmatrix}-4\\3\\-1\end{pmatrix}\]</p>
+        <p>Abstandsformel: \(d=\dfrac{|\overrightarrow{RA}\times\vec u|}{|\vec u|}=\dfrac{\sqrt{16+9+1}}{\sqrt{1+4+4}}=\dfrac{\sqrt{26}}{3}\).</p>
+        <div class="result">d ≈ 1,70 LE</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">c</span><span class="tag">§01 Skalarprodukt</span><span class="tag">§09 Abstände & Winkel</span></div>
+    <p class="aufgabenstellung">Berechnen Sie den Schnittwinkel der windschiefen Geraden g und h aus Aufgabe 2a.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Auch windschiefe Geraden haben einen wohldefinierten Schnittwinkel — er wird allein über die Richtungsvektoren bestimmt:
+        \[\cos\varphi=\frac{|\vec u\cdot\vec v|}{|\vec u||\vec v|}=\frac{|2\cdot1+1\cdot2+(-1)(-3)|}{\sqrt{6}\cdot\sqrt{14}}=\frac{7}{\sqrt{84}}=\frac{\sqrt{21}}{6}\approx0{,}764\]</p>
+        <div class="result">φ ≈ 40,2°</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">d</span><span class="tag">§01 Skalarprodukt</span><span class="tag">§09 Abstände & Winkel</span></div>
+    <p class="aufgabenstellung">Gegeben ist \(q:\ \vec x=\begin{pmatrix}2\\1\\-1\end{pmatrix}+t\begin{pmatrix}1\\1\\1\end{pmatrix}\). Berechnen Sie den Schnittwinkel zwischen q und der Ebene E aus Aufgabe 1.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Für den Winkel zwischen Gerade und Ebene wird der Richtungsvektor mit dem Normalenvektor verrechnet (nicht mit \(\cos\), sondern mit \(\sin\), da hier der Winkel zur Ebene und nicht zur Normalen gesucht ist):
+        \[\sin\varphi=\frac{|\vec u\cdot\vec n|}{|\vec u||\vec n|}=\frac{|1\cdot2+1\cdot3+1\cdot4|}{\sqrt3\cdot\sqrt{29}}=\frac{9}{\sqrt{87}}\approx0{,}965\]</p>
+        <div class="result">φ ≈ 74,8°</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">e</span><span class="tag">§01 Skalarprodukt</span><span class="tag">§09 Abstände & Winkel</span></div>
+    <p class="aufgabenstellung">Berechnen Sie den Schnittwinkel der Ebenen \(E_2\) und \(E_3\) aus Aufgabe 2c.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Winkel zwischen zwei Ebenen = Winkel zwischen ihren Normalenvektoren:
+        \[\cos\varphi=\frac{|\vec n_2\cdot\vec n_3|}{|\vec n_2||\vec n_3|}=\frac{|2-2-1|}{\sqrt6\cdot\sqrt6}=\frac{1}{6}\approx0{,}167\]</p>
+        <div class="result">φ ≈ 80,4°</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">f</span><span class="tag">§13 Geometrische Bedeutung</span></div>
+    <p class="aufgabenstellung">Erläutern Sie: (1) Was bedeutet es geometrisch, wenn für zwei Vektoren \(\vec u\cdot\vec v=0\) gilt? (2) Welche geometrische Bedeutung hat \(|\vec u\times\vec v|\)? Nutzen Sie (2), um den Flächeninhalt des Dreiecks ABC aus Aufgabe 1 zu berechnen.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p><strong>(1)</strong> Aus \(\vec u\cdot\vec v=|\vec u||\vec v|\cos\varphi\) folgt: Ist \(\vec u\cdot\vec v=0\) und sind beide Vektoren nicht der Nullvektor, muss \(\cos\varphi=0\) gelten, also \(\varphi=90°\). Die Vektoren stehen senkrecht aufeinander (orthogonal). Genau darauf beruhen z. B. die Bedingung „Richtungsvektor ⊥ Normalenvektor" in Aufgabe 2b und die Konstruktion des Lotfußpunkts bei jeder Spiegelung.</p>
+        <p><strong>(2)</strong> Es gilt \(|\vec u\times\vec v|=|\vec u||\vec v|\sin\varphi\). Das entspricht genau der Flächenformel „Grundseite mal Höhe" für ein Parallelogramm, das von \(\vec u\) und \(\vec v\) aufgespannt wird: \(|\vec u\times\vec v|\) ist also der Flächeninhalt dieses Parallelogramms. Ein Dreieck ist die Hälfte davon.</p>
+        <p>Für Dreieck ABC gilt \(\vec n=\overrightarrow{AB}\times\overrightarrow{AC}=\begin{pmatrix}-2\\-3\\-4\end{pmatrix}\) (siehe Aufgabe 1d), also
+        \[A_{ABC}=\frac12|\overrightarrow{AB}\times\overrightarrow{AC}|=\frac12\sqrt{4+9+16}=\frac{\sqrt{29}}2\]</p>
+        <div class="result">A ≈ 2,69 FE</div>
+      </div>
+    </details>
+  </div>
+  <a class="backlink" href="#top">↑ Zur Übersicht</a>
+</section>
+
+<!-- ========================= AUFGABE 4 ========================= -->
+<section class="aufgabe" id="a4">
+  <div class="aufgabe-head">
+    <span class="eyebrow">Aufgabe 04</span>
+    <h2>Spiegelungen im Raum</h2>
+  </div>
+  <p class="context">Beide Spiegelungstypen (an einer Ebene, an einer Geraden) laufen nach demselben Prinzip: Lot fällen, Lotfußpunkt bestimmen, Bildpunkt als Punktspiegelung am Lotfußpunkt berechnen.</p>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">a</span><span class="tag">§10 Spiegelung</span><span class="tag">§04 Betrag</span></div>
+    <p class="aufgabenstellung">Spiegeln Sie <span class="pt">P(1|1|1)</span> an der Ebene \(E: x_1+2x_2+2x_3=14\). Geben Sie Lotfußpunkt F, Bildpunkt P' und den Abstand von P zu E an.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Hilfsgerade durch P in Richtung des Normalenvektors \(\vec n=\begin{pmatrix}1\\2\\2\end{pmatrix}\): \(\vec x=\begin{pmatrix}1\\1\\1\end{pmatrix}+t\begin{pmatrix}1\\2\\2\end{pmatrix}\). Einsetzen in E:
+        \[(1+t)+2(1+2t)+2(1+2t)=14 \Rightarrow 5+9t=14 \Rightarrow t=1\]</p>
+        <p>Lotfußpunkt: \(F=P+1\cdot\vec n=(2|3|3)\). Der Bildpunkt ergibt sich, da F der Mittelpunkt von P und P' ist: \(P'=2F-P=(3|5|5)\).</p>
+        <p>Abstand: \(d=|t|\cdot|\vec n|=1\cdot\sqrt{1+4+4}=3\).</p>
+        <div class="result">F(2|3|3) · P'(3|5|5) · d = 3 LE</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">b</span><span class="tag">§10 Spiegelung</span></div>
+    <p class="aufgabenstellung">Spiegeln Sie <span class="pt">S(3|0|0)</span> an der Geraden \(j:\ \vec x=t\begin{pmatrix}1\\1\\1\end{pmatrix}\). Geben Sie Lotfußpunkt L und Bildpunkt S' an.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Ein allgemeiner Punkt auf j ist \(L=t\begin{pmatrix}1\\1\\1\end{pmatrix}\). Bedingung für den Lotfußpunkt: \(\overrightarrow{SL}\) steht senkrecht auf dem Richtungsvektor, also \((L-S)\cdot\vec u=0\):
+        \[(t-3)+t+t=0 \Rightarrow 3t=3 \Rightarrow t=1\]</p>
+        <p>Lotfußpunkt: \(L=(1|1|1)\). Bildpunkt (L ist Mittelpunkt von S und S'): \(S'=2L-S=(-1|2|2)\).</p>
+        <p>Probe: \(|\overrightarrow{SL}|=|(-2,1,1)|=\sqrt6\) und \(|\overrightarrow{S'L}|=|(2,-1,-1)|=\sqrt6\) — stimmen überein. ✓</p>
+        <div class="result">L(1|1|1) · S'(-1|2|2)</div>
+      </div>
+    </details>
+  </div>
+  <a class="backlink" href="#top">↑ Zur Übersicht</a>
+</section>
+
+<!-- ========================= AUFGABE 5 ========================= -->
+<section class="aufgabe" id="a5">
+  <div class="aufgabe-head">
+    <span class="eyebrow">Aufgabe 05</span>
+    <h2>Ebenengleichungen flexibel nutzen</h2>
+  </div>
+  <p class="context">Diese Aufgabe verlangt die Umkehrrichtung von 1d sowie das gezielte Konstruieren einer Ebene aus geometrischen Eigenschaften statt aus drei gegebenen Punkten.</p>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">a</span><span class="tag">§11 Umwandeln</span></div>
+    <p class="aufgabenstellung">Die Ebene E ist gegeben durch \(3x_1-2x_2+x_3=6\). Geben Sie eine Gleichung von E in Parameterform an.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Am einfachsten eignen sich die Spurpunkte als drei konkrete Ebenenpunkte: \(x_2=x_3=0\Rightarrow x_1=2\); \(x_1=x_3=0\Rightarrow x_2=-3\); \(x_1=x_2=0\Rightarrow x_3=6\). Also \(A(2|0|0)\), \(B(0|-3|0)\), \(C(0|0|6)\).</p>
+        <p>Zwei Spannvektoren: \(\overrightarrow{AB}=\begin{pmatrix}-2\\-3\\0\end{pmatrix}\), \(\overrightarrow{AC}=\begin{pmatrix}-2\\0\\6\end{pmatrix}\).</p>
+        <div class="result">\(E:\ \vec x=\begin{pmatrix}2\\0\\0\end{pmatrix}+r\begin{pmatrix}-2\\-3\\0\end{pmatrix}+s\begin{pmatrix}-2\\0\\6\end{pmatrix}\)</div>
+        <p class="note">Probe (optional, zeigt den Rückweg): \(\overrightarrow{AB}\times\overrightarrow{AC}=(-18,12,-6)=-6\cdot(3,-2,1)\) — ein Vielfaches des ursprünglichen Normalenvektors. Die Umwandlung ist konsistent.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">b</span><span class="tag">§02 Kreuzprodukt</span><span class="tag">§12 Gleichung aus Eigenschaften</span></div>
+    <p class="aufgabenstellung">Bestimmen Sie eine Koordinatengleichung der Ebene H, die die Punkte \(P_1(1|0|2)\) und \(P_2(3|1|0)\) enthält und orthogonal zur Ebene \(G: x_1+x_2-x_3=4\) ist.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p><strong>Ansatz:</strong> Der gesuchte Normalenvektor \(\vec n_H\) muss zwei Bedingungen erfüllen: Er muss senkrecht zu \(\overrightarrow{P_1P_2}\) stehen (damit die Verbindungsgerade von \(P_1\) und \(P_2\) in H liegt) und senkrecht zu \(\vec n_G\) stehen (damit \(H\perp G\), denn zwei Ebenen sind orthogonal genau dann, wenn ihre Normalenvektoren orthogonal sind). Ein Vektor, der zu zwei gegebenen Vektoren gleichzeitig senkrecht ist, ergibt sich direkt aus deren Kreuzprodukt.</p>
+        <p>\(\overrightarrow{P_1P_2}=\begin{pmatrix}2\\1\\-2\end{pmatrix}\), \(\vec n_G=\begin{pmatrix}1\\1\\-1\end{pmatrix}\):
+        \[\vec n_H=\overrightarrow{P_1P_2}\times\vec n_G=\begin{pmatrix}1\cdot(-1)-(-2)(1)\\(-2)(1)-2\cdot(-1)\\2\cdot1-1\cdot1\end{pmatrix}=\begin{pmatrix}1\\0\\1\end{pmatrix}\]</p>
+        <p>Probe: \(\vec n_H\cdot\overrightarrow{P_1P_2}=2+0-2=0\) ✓, \(\vec n_H\cdot\vec n_G=1+0-1=0\) ✓. Mit \(P_1\) als Aufpunkt: \(1(x_1-1)+0(x_2-0)+1(x_3-2)=0\).</p>
+        <div class="result">H: x₁ + x₃ = 3</div>
+        <p class="note">Dass \(x_2\) nicht vorkommt, ist kein Fehler — es bedeutet, dass H parallel zur \(x_2\)-Achse verläuft. Probe: \(P_1\): \(1+2=3\) ✓, \(P_2\): \(3+0=3\) ✓.</p>
+      </div>
+    </details>
+  </div>
+  <a class="backlink" href="#top">↑ Zur Übersicht</a>
+</section>
+
+</main>
+<footer>Alle Ergebnisse mit exakter Rechnung (sympy) gegengeprüft.</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analysis – mündliches Abitur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  chtml: { scale: 1.0 }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js" id="mathjax-script"></script>
+<style>
+  :root{
+    --paper:#FAFBFC; --grid:#E7ECF3; --ink:#1A2B47; --body:#2D3648;
+    --blue:#2568A8; --blue-tint:#EAF1FA; --teal:#2F7566; --teal-tint:#E7F3EF;
+    --amber:#A9752E; --amber-tint:#FBF3E7; --line:#D9E1EA;
+    --mono:'IBM Plex Mono',monospace; --serif:'Source Serif 4',Georgia,serif; --disp:'Space Grotesk',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/28px 28px,
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/28px 28px,
+      var(--paper);
+    color:var(--body); font-family:var(--serif); line-height:1.62; font-size:16.5px;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:740px; margin:0 auto; padding:1.6rem 1.1rem 4rem;}
+  header.top{padding-top:0.4rem;}
+  .eyebrow{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.14em; color:var(--blue);
+    text-transform:uppercase; display:block; margin-bottom:0.5rem;
+  }
+  h1{
+    font-family:var(--disp); font-weight:700; color:var(--ink); font-size:1.85rem;
+    margin:0 0 0.35rem; letter-spacing:-0.01em; line-height:1.15;
+  }
+  .sub{color:var(--body); font-size:1.02rem; margin:0 0 1.1rem; max-width:56ch;}
+  .intro-note{
+    font-size:0.96rem; border-left:3px solid var(--blue); padding:0.55rem 0 0.55rem 0.9rem;
+    background:rgba(37,104,168,0.045); border-radius:0 6px 6px 0; margin-bottom:1.6rem;
+  }
+  .intro-note strong{color:var(--ink);}
+  table.checklist{
+    width:100%; border-collapse:collapse; font-size:0.86rem; margin-bottom:1.9rem;
+    background:#fff; border:1px solid var(--line); border-radius:8px; overflow:hidden;
+  }
+  table.checklist caption{
+    font-family:var(--disp); font-weight:600; font-size:0.78rem; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--ink); text-align:left; padding:0.7rem 0.8rem 0.5rem;
+    background:#fff;
+  }
+  table.checklist th{
+    font-family:var(--mono); font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase;
+    color:#6b7690; text-align:left; padding:0.4rem 0.8rem; border-bottom:1px solid var(--line);
+  }
+  table.checklist td{
+    padding:0.5rem 0.8rem; border-bottom:1px solid var(--line); vertical-align:top;
+  }
+  table.checklist tr:last-child td{border-bottom:none;}
+  table.checklist td.num{font-family:var(--mono); color:var(--blue); white-space:nowrap;}
+  table.checklist td.ref{font-family:var(--mono); color:var(--amber); white-space:nowrap; font-size:0.8rem;}
+  nav.jump{display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:2.2rem;}
+  nav.jump a{
+    font-family:var(--mono); font-size:0.78rem; color:var(--ink); text-decoration:none;
+    border:1px solid var(--line); background:#fff; padding:0.4rem 0.7rem; border-radius:20px;
+  }
+  nav.jump a:hover{border-color:var(--blue); color:var(--blue);}
+  section.aufgabe{
+    background:#fff; border:1px solid var(--line); border-radius:12px;
+    padding:1.4rem 1.3rem 1.6rem; margin-bottom:1.8rem; scroll-margin-top:1rem;
+  }
+  .aufgabe-head .eyebrow{margin-bottom:0.3rem;}
+  section.aufgabe h2{
+    font-family:var(--disp); font-weight:600; color:var(--ink); font-size:1.32rem; margin:0 0 0.7rem;
+  }
+  p.context{font-size:0.98rem; margin:0 0 1.2rem; padding-bottom:1.1rem; border-bottom:1px dashed var(--line);}
+  .teil{margin-bottom:1.35rem;}
+  .teil:last-of-type{margin-bottom:0.4rem;}
+  .teil-head{display:flex; align-items:center; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.45rem;}
+  .teil-letter{
+    font-family:var(--disp); font-weight:700; color:#fff; background:var(--ink);
+    width:1.55rem; height:1.55rem; border-radius:50%; display:inline-flex; align-items:center;
+    justify-content:center; font-size:0.78rem; flex:none;
+  }
+  .tag{
+    font-family:var(--mono); font-size:0.66rem; padding:0.16rem 0.45rem; background:var(--blue-tint);
+    color:var(--blue); border-radius:4px; border:1px solid rgba(37,104,168,0.22); white-space:nowrap;
+  }
+  p.aufgabenstellung{margin:0 0 0.6rem; font-size:0.99rem;}
+  .pt{font-family:var(--mono); font-size:0.94em; color:var(--ink);}
+  details.solution{border:1px solid var(--line); border-radius:8px; background:#fff; margin-top:0.5rem;}
+  details.solution summary{
+    cursor:pointer; list-style:none; padding:0.55rem 0.9rem; font-family:var(--disp); font-weight:600;
+    font-size:0.82rem; letter-spacing:0.02em; color:var(--teal); background:var(--teal-tint);
+    border-radius:8px; display:flex; align-items:center; gap:0.5rem; user-select:none;
+  }
+  details.solution summary::-webkit-details-marker{display:none;}
+  details.solution summary::marker{content:'';}
+  details.solution summary::before{content:'▸'; transition:transform 0.15s ease; font-size:0.75rem;}
+  details.solution[open] summary::before{transform:rotate(90deg);}
+  details.solution[open] summary{border-radius:8px 8px 0 0;}
+  details.solution summary .hide{display:none;}
+  details.solution[open] summary .show{display:none;}
+  details.solution[open] summary .hide{display:inline;}
+  .sol-body{padding:0.95rem 1.05rem 1.1rem; font-size:0.95rem;}
+  .sol-body p{margin:0 0 0.65rem;}
+  .sol-body p:last-child{margin-bottom:0;}
+  .note{
+    font-size:0.88rem; background:var(--amber-tint); border-left:3px solid var(--amber);
+    padding:0.5rem 0.8rem; border-radius:0 6px 6px 0; margin-top:0.7rem;
+  }
+  .result{
+    font-family:var(--mono); background:var(--blue-tint); border-radius:6px; padding:0.5rem 0.75rem;
+    display:inline-block; margin-top:0.2rem; font-size:0.92rem; color:var(--ink);
+  }
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%;}
+  .sketch-box{margin-top:0.6rem;}
+  .sketch-box svg{width:100%; max-width:380px; height:auto; display:block; margin:0 auto;}
+  .graph-label{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--ink); text-align:center; margin:0 0 0.25rem;
+  }
+  .graph-row{display:flex; flex-direction:column; gap:1rem; margin-top:0.6rem;}
+  .backlink{
+    display:inline-block; margin-top:0.6rem; font-family:var(--mono); font-size:0.76rem;
+    color:#8592a8; text-decoration:none;
+  }
+  .backlink:hover{color:var(--blue);}
+  footer{text-align:center; font-size:0.85rem; color:#8592a8; padding-top:0.8rem;}
+  @media (max-width:480px){
+    h1{font-size:1.55rem;}
+    section.aufgabe{padding:1.1rem 0.9rem 1.3rem;}
+    table.checklist{font-size:0.78rem;}
+    table.checklist td, table.checklist th{padding:0.4rem 0.5rem;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top" id="top">
+  <span class="eyebrow">Mündliches Abitur · Mathematik · Analysis</span>
+  <h1>Analysis</h1>
+  <p class="sub">Sechs zusammenhängende Aufgabenkomplexe, die zusammen alle 12 von dir genannten Anforderungen abdecken.</p>
+  <div class="intro-note">
+    <strong>Ableiten</strong> und die <strong>Bestimmung von Extrempunkten</strong> stecken bewusst nicht nur als eigene Mini-Aufgabe drin, sondern zusätzlich dort, wo sie in echten Prüfungen ständig gebraucht werden: eingebettet in Sachkontext- und Extremwertaufgaben. „Testen/Zählen" habe ich als <em>Nachweis der Nullstellenanzahl über Monotonie</em> plus <em>Verhalten im Unendlichen</em> interpretiert (Aufgabe 1f) — meld dich, falls du damit etwas anderes meintest. Versuch jede Teilaufgabe zuerst selbst und sprich deinen Lösungsweg dabei laut mit, denn genau das wird in der mündlichen Prüfung verlangt, nicht nur das Endergebnis.
+  </div>
+
+  <table class="checklist">
+    <caption>Abdeckung deiner 12 Anforderungen</caption>
+    <tr><th>§</th><th>Thema</th><th>Aufgabe</th></tr>
+    <tr><td class="num">01</td><td>Ableiten</td><td class="ref">1a</td></tr>
+    <tr><td class="num">02</td><td>Stammfunktion</td><td class="ref">2a</td></tr>
+    <tr><td class="num">03</td><td>Nullstellenanzahl testen / Verhalten im Unendlichen</td><td class="ref">1f</td></tr>
+    <tr><td class="num">04</td><td>Nullstellen berechnen</td><td class="ref">1b · 6a</td></tr>
+    <tr><td class="num">05</td><td>Funktionswerte ablesen & berechnen</td><td class="ref">1e · 2b</td></tr>
+    <tr><td class="num">06</td><td>Integral berechnen</td><td class="ref">2c</td></tr>
+    <tr><td class="num">07</td><td>Extrempunkte & Wendepunkte</td><td class="ref">1c · 1d · 2d</td></tr>
+    <tr><td class="num">08</td><td>Funktionsterme bestimmen & zuordnen</td><td class="ref">3a · 3b</td></tr>
+    <tr><td class="num">09</td><td>Werte, Flächen & Ergebnisse interpretieren</td><td class="ref">2b · 2c · 5c</td></tr>
+    <tr><td class="num">10</td><td>Extremwertaufgaben</td><td class="ref">5a – 5c</td></tr>
+    <tr><td class="num">11</td><td>Berührpunkte</td><td class="ref">4a · 4b</td></tr>
+    <tr><td class="num">12</td><td>Parameteraufgaben</td><td class="ref">6a – 6d</td></tr>
+  </table>
+
+  <nav class="jump">
+    <a href="#a1">Aufgabe 1 · Kurvendiskussion</a>
+    <a href="#a2">Aufgabe 2 · Sachkontext</a>
+    <a href="#a3">Aufgabe 3 · Zuordnen & Bestimmen</a>
+    <a href="#a4">Aufgabe 4 · Berührpunkte</a>
+    <a href="#a5">Aufgabe 5 · Extremwertaufgabe</a>
+    <a href="#a6">Aufgabe 6 · Parameter</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ========================= AUFGABE 1 ========================= -->
+<section class="aufgabe" id="a1">
+  <div class="aufgabe-head">
+    <span class="eyebrow">Aufgabe 01</span>
+    <h2>Kurvendiskussion der Funktion f</h2>
+  </div>
+  <p class="context">Gegeben ist die ganzrationale Funktion \(f(x)=x^3-6x^2+9x\) mit \(x\in\mathbb{R}\).</p>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">a</span><span class="tag">§01 Ableiten</span></div>
+    <p class="aufgabenstellung">Bestimmen Sie \(f'(x)\) und \(f''(x)\).</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Mit der Potenzregel, gliedweise abgeleitet:
+        \[f'(x)=3x^2-12x+9\]
+        \[f''(x)=6x-12\]</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">b</span><span class="tag">§04 Nullstellen</span></div>
+    <p class="aufgabenstellung">Berechnen Sie die Nullstellen von f. Faktorisieren Sie den Funktionsterm vollständig.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Ausklammern von x liefert \(f(x)=x(x^2-6x+9)\). Der verbleibende Faktor ist eine binomische Formel: \(x^2-6x+9=(x-3)^2\). Also
+        \[f(x)=x\cdot(x-3)^2\]</p>
+        <div class="result">Nullstellen: x = 0 (einfach) · x = 3 (doppelt)</div>
+        <p class="note">Bei einer <strong>doppelten</strong> Nullstelle berührt der Graph die x-Achse dort nur, ohne sie zu überqueren — es findet kein Vorzeichenwechsel statt. Das wird in Teilaufgabe c) noch wichtig: bei x = 3 liegt gleichzeitig ein Minimum mit Funktionswert 0.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">c</span><span class="tag">§07 Extrempunkte</span></div>
+    <p class="aufgabenstellung">Bestimmen Sie die Extrempunkte von f. Weisen Sie deren Art mit einer hinreichenden Bedingung nach.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Notwendige Bedingung \(f'(x)=0\): \(3x^2-12x+9=0 \Leftrightarrow x^2-4x+3=0 \Leftrightarrow (x-1)(x-3)=0\), also \(x=1\) oder \(x=3\).</p>
+        <p>Hinreichende Bedingung über \(f''\): \(f''(1)=6-12=-6<0\) ⇒ Maximum. \(f''(3)=18-12=6>0\) ⇒ Minimum.
+        Mit \(f(1)=1-6+9=4\) und \(f(3)=27-54+27=0\):</p>
+        <div class="result">Maximum HP(1|4) · Minimum TP(3|0)</div>
+        <p class="note">Der Minimalwert 0 bei x = 3 erklärt geometrisch die doppelte Nullstelle aus b): Ein Minimum <em>auf</em> der x-Achse kann diese nur berühren, nicht schneiden — sonst läge links oder rechts davon ein negativer Funktionswert, was dem Minimum widerspräche.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">d</span><span class="tag">§07 Wendepunkt</span></div>
+    <p class="aufgabenstellung">Bestimmen Sie den Wendepunkt von f. Nennen Sie eine Eigenschaft, die für Graphen ganzrationaler Funktionen 3. Grades an dieser Stelle stets gilt.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Notwendige Bedingung \(f''(x)=0\): \(6x-12=0 \Rightarrow x=2\). Hinreichend: \(f'''(x)=6\neq 0\) für alle x, also tatsächlich ein Wendepunkt. Mit \(f(2)=8-24+18=2\):</p>
+        <div class="result">Wendepunkt W(2|2)</div>
+        <p class="note">Jeder Graph einer ganzrationalen Funktion 3. Grades ist <strong>punktsymmetrisch zu seinem Wendepunkt</strong>. Das erklärt beiläufig auch, warum Maximum und Minimum in c) gleich weit von x = 2 entfernt liegen (je eine Einheit).</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">e</span><span class="tag">§05 Ablesen & Berechnen</span></div>
+    <p class="aufgabenstellung">Lesen Sie am abgebildeten Graphen näherungsweise den Wert \(f(1{,}5)\) ab. Berechnen Sie anschließend den exakten Wert und vergleichen Sie. Bestätigen Sie außerdem rechnerisch den abgelesenen Funktionswert bei x = 4.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <div class="sketch-box">
+          <svg viewBox="0 0 380 280" role="img" aria-label="Graph von f mit markiertem Punkt bei x=1,5">
+            <line x1="35" y1="172.7" x2="355" y2="172.7" stroke="#1A2B47" stroke-width="1.3"/>
+            <line x1="64.6" y1="20" x2="64.6" y2="260" stroke="#1A2B47" stroke-width="1.3"/>
+            <line x1="129.8" y1="20" x2="129.8" y2="260" stroke="#D9E1EA" stroke-width="1"/>
+            <line x1="195.0" y1="20" x2="195.0" y2="260" stroke="#D9E1EA" stroke-width="1"/>
+            <line x1="260.2" y1="20" x2="260.2" y2="260" stroke="#D9E1EA" stroke-width="1"/>
+            <line x1="325.4" y1="20" x2="325.4" y2="260" stroke="#D9E1EA" stroke-width="1"/>
+            <line x1="35" y1="129.1" x2="355" y2="129.1" stroke="#D9E1EA" stroke-width="1"/>
+            <line x1="35" y1="85.5" x2="355" y2="85.5" stroke="#D9E1EA" stroke-width="1"/>
+            <line x1="35" y1="41.8" x2="355" y2="41.8" stroke="#D9E1EA" stroke-width="1"/>
+            <line x1="35" y1="216.4" x2="355" y2="216.4" stroke="#D9E1EA" stroke-width="1"/>
+            <polyline points="45.0,244.0 48.3,230.3 51.5,217.4 54.8,205.2 58.0,193.7 61.3,182.9 64.6,172.7 67.8,163.2 71.1,154.4 74.3,146.1 77.6,138.5 80.9,131.5 84.1,125.0 87.4,119.1 90.7,113.7 93.9,108.9 97.2,104.5 100.4,100.7 103.7,97.3 107.0,94.4 110.2,91.9 113.5,89.9 116.7,88.2 120.0,87.0 123.3,86.1 126.5,85.6 129.8,85.5 133.0,85.6 136.3,86.1 139.6,86.9 142.8,87.9 146.1,89.2 149.3,90.8 152.6,92.5 155.9,94.5 159.1,96.7 162.4,99.1 165.7,101.6 168.9,104.3 172.2,107.1 175.4,110.0 178.7,113.1 182.0,116.2 185.2,119.3 188.5,122.6 191.7,125.8 195.0,129.1 198.3,132.4 201.5,135.6 204.8,138.8 208.0,142.0 211.3,145.1 214.6,148.1 217.8,151.1 221.1,153.9 224.3,156.6 227.6,159.1 230.9,161.5 234.1,163.7 237.4,165.6 240.7,167.4 243.9,169.0 247.2,170.3 250.4,171.3 253.7,172.1 257.0,172.6 260.2,172.7 263.5,172.6 266.7,172.1 270.0,171.2 273.3,169.9 276.5,168.3 279.8,166.2 283.0,163.8 286.3,160.9 289.6,157.5 292.8,153.6 296.1,149.3 299.3,144.5 302.6,139.1 305.9,133.2 309.1,126.7 312.4,119.7 315.7,112.0 318.9,103.8 322.2,94.9 325.4,85.5 328.7,75.3 332.0,64.5 335.2,53.0 338.5,40.8 341.7,27.8 345.0,14.2" fill="none" stroke="#2568A8" stroke-width="2.5"/>
+            <line x1="162.4" y1="99.1" x2="162.4" y2="172.7" stroke="#A9752E" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="64.6" y1="99.1" x2="162.4" y2="99.1" stroke="#A9752E" stroke-width="1" stroke-dasharray="4 3"/>
+            <circle cx="162.4" cy="99.1" r="4.5" fill="#A9752E"/>
+            <text x="122" y="15" font-family="IBM Plex Mono" font-size="12" fill="#1A2B47">f(x)</text>
+            <text x="348" y="185" font-family="IBM Plex Mono" font-size="12" fill="#1A2B47">x</text>
+            <text x="126" y="185" font-family="IBM Plex Mono" font-size="10" fill="#6b7690">1</text>
+            <text x="191" y="185" font-family="IBM Plex Mono" font-size="10" fill="#6b7690">2</text>
+            <text x="257" y="185" font-family="IBM Plex Mono" font-size="10" fill="#6b7690">3</text>
+            <text x="322" y="185" font-family="IBM Plex Mono" font-size="10" fill="#6b7690">4</text>
+            <text x="45" y="133" font-family="IBM Plex Mono" font-size="10" fill="#6b7690">2</text>
+            <text x="45" y="89" font-family="IBM Plex Mono" font-size="10" fill="#6b7690">4</text>
+            <text x="45" y="46" font-family="IBM Plex Mono" font-size="10" fill="#6b7690">6</text>
+            <text x="45" y="220" font-family="IBM Plex Mono" font-size="10" fill="#6b7690">-2</text>
+          </svg>
+        </div>
+        <p style="font-size:0.85rem; color:#6b7690; margin-top:0.3rem;">Der markierte Punkt liegt bei x = 1,5, ca. auf Höhe y ≈ 3,4.</p>
+        <p>Exakte Rechnung: \(f(1{,}5)=1{,}5^3-6\cdot1{,}5^2+9\cdot1{,}5=3{,}375-13{,}5+13{,}5=3{,}375\). Der abgelesene Näherungswert passt sehr gut.</p>
+        <p>Für x = 4: \(f(4)=64-96+36=4\) — auch das deckt sich mit dem Graphen, der bei x = 4 wieder die Höhe 4 erreicht (denselben Wert wie das Maximum bei x = 1, was hier reiner Zufall der gewählten Zahlen ist).</p>
+        <div class="result">f(1,5) = 3,375 · f(4) = 4</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">f</span><span class="tag">§03 Nullstellenanzahl · Verhalten im Unendlichen</span></div>
+    <p class="aufgabenstellung">Begründen Sie mithilfe des Monotonieverhaltens von f, dass es außer den in b) gefundenen keine weiteren Nullstellen gibt. Untersuchen Sie zusätzlich das Verhalten von f für \(x\to\pm\infty\).</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Aus c) hat \(f'\) genau zwei Nullstellen (x = 1 und x = 3). Damit zerfällt \(\mathbb{R}\) in genau drei Monotonieintervalle: f ist streng monoton <strong>steigend</strong> auf \((-\infty;1]\), streng monoton <strong>fallend</strong> auf \([1;3]\) und wieder streng monoton <strong>steigend</strong> auf \([3;\infty)\).</p>
+        <p>Auf jedem dieser Intervalle kann eine streng monotone, stetige Funktion höchstens einmal den Wert 0 annehmen. Auf \((-\infty;1]\) steigt f von \(-\infty\) bis \(f(1)=4\) und durchläuft dabei genau einmal die x-Achse — das ist die bereits gefundene Nullstelle x = 0. Auf \([1;3]\) fällt f von 4 auf 0, berührt die x-Achse also gerade am rechten Rand (x = 3), ohne vorher schon negativ geworden zu sein. Auf \([3;\infty)\) startet f bei 0 und steigt danach echt monoton, kann die x-Achse also nicht noch einmal erreichen.</p>
+        <div class="result">⇒ f besitzt außer x = 0 und x = 3 keine weiteren Nullstellen.</div>
+        <p>Verhalten im Unendlichen: Für \(x\to\pm\infty\) dominiert der Term \(x^3\) (höchster Grad, positiver Leitkoeffizient). Da 3 eine ungerade Zahl ist, gilt
+        \[\lim_{x\to+\infty}f(x)=+\infty \qquad\qquad \lim_{x\to-\infty}f(x)=-\infty\]</p>
+      </div>
+    </details>
+  </div>
+  <a class="backlink" href="#top">↑ Zur Übersicht</a>
+</section>
+
+<!-- ========================= AUFGABE 2 ========================= -->
+<section class="aufgabe" id="a2">
+  <div class="aufgabe-head">
+    <span class="eyebrow">Aufgabe 02</span>
+    <h2>Zufluss in ein Regenrückhaltebecken</h2>
+  </div>
+  <p class="context">Ein Regenrückhaltebecken wird über einen Zeitraum von 12 Minuten beobachtet. Die momentane Zuflussrate wird für \(t\in[0;12]\) (t in Minuten) modelliert durch \(r(t)=12t-t^2\) (in m³ pro Minute).</p>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">a</span><span class="tag">§02 Stammfunktion</span></div>
+    <p class="aufgabenstellung">Bestimmen Sie eine Stammfunktion R von r mit R(0) = 0. R(t) beschreibt dann die bis zum Zeitpunkt t insgesamt zugeflossene Wassermenge.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Allgemeine Stammfunktion (Potenzregel rückwärts, jeweils Exponent um 1 erhöhen und durch den neuen Exponenten teilen):
+        \[R(t)=6t^2-\frac13t^3+C\]
+        Aus \(R(0)=C=0\) folgt \(C=0\).</p>
+        <div class="result">R(t) = 6t² − ⅓t³</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">b</span><span class="tag">§05 Funktionswert</span><span class="tag">§09 Interpretieren</span></div>
+    <p class="aufgabenstellung">Berechnen Sie r(3) und interpretieren Sie das Ergebnis im Sachzusammenhang.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>\(r(3)=12\cdot3-3^2=36-9=27\)</p>
+        <div class="result">r(3) = 27 m³/min</div>
+        <p>Zum Zeitpunkt t = 3 min fließt dem Becken Wasser mit einer momentanen Rate von 27 m³ pro Minute zu.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">c</span><span class="tag">§06 Integral</span><span class="tag">§09 Interpretieren</span></div>
+    <p class="aufgabenstellung">Berechnen Sie \(\displaystyle\int_0^6 r(t)\,dt\) und interpretieren Sie das Ergebnis im Sachzusammenhang.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Mit dem Hauptsatz der Differential- und Integralrechnung und R aus a):
+        \[\int_0^6 r(t)\,dt = R(6)-R(0) = \left(6\cdot36-\frac13\cdot216\right)-0 = 216-72=144\]</p>
+        <div class="result">∫₀⁶ r(t) dt = 144 m³</div>
+        <p>In den ersten 6 Minuten fließen dem Becken insgesamt 144 m³ Wasser zu.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">d</span><span class="tag">§07 Extremum im Kontext</span></div>
+    <p class="aufgabenstellung">Zu welchem Zeitpunkt ist die Zuflussrate am größten? Geben Sie diese maximale Rate an und interpretieren Sie das Ergebnis.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Notwendige Bedingung: \(r'(t)=12-2t=0 \Rightarrow t=6\). Hinreichend: \(r''(t)=-2<0\), also Maximum. \(r(6)=72-36=36\).</p>
+        <div class="result">Maximale Zuflussrate: 36 m³/min nach t = 6 min</div>
+        <p class="note">Da r als nach unten geöffnete Parabel symmetrisch zu t = 6 verläuft, ist auch \(\int_6^{12}r(t)\,dt=144\) — genau so viel wie in c) für die ersten 6 Minuten. Zum Zeitpunkt der maximalen Zuflussrate ist also bereits exakt die Hälfte der insgesamt zugeflossenen Wassermenge (288 m³ über die vollen 12 Minuten) im Becken angekommen.</p>
+      </div>
+    </details>
+  </div>
+  <a class="backlink" href="#top">↑ Zur Übersicht</a>
+</section>
+
+<!-- ========================= AUFGABE 3 ========================= -->
+<section class="aufgabe" id="a3">
+  <div class="aufgabe-head">
+    <span class="eyebrow">Aufgabe 03</span>
+    <h2>Graphen zuordnen & Funktionsterm bestimmen</h2>
+  </div>
+  <p class="context">Beide Teilaufgaben verlangen, von Eigenschaften auf einen Funktionsterm bzw. einen passenden Graphen zu schließen — die Umkehrrichtung der klassischen Kurvendiskussion.</p>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">a</span><span class="tag">§08 Zuordnen</span></div>
+    <p class="aufgabenstellung">Die drei folgenden Graphen A, B und C zeigen — in beliebiger Reihenfolge — die Funktion f aus Aufgabe 1 sowie ihre Ableitungen f' und f''. Ordnen Sie zu und begründen Sie.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <div class="graph-row">
+          <div class="sketch-box">
+            <p class="graph-label">Graph A</p>
+            <svg viewBox="0 0 300 140" role="img" aria-label="Graph A: Gerade">
+              <line x1="15" y1="10" x2="15" y2="130" stroke="#D9E1EA" stroke-width="1"/>
+              <line x1="15" y1="70.0" x2="285" y2="70.0" stroke="#D9E1EA" stroke-width="1" stroke-dasharray="4 3"/>
+              <polyline points="15.0,118.4 18.4,117.2 21.8,116.0 25.1,114.8 28.5,113.5 31.9,112.3 35.2,111.1 38.6,109.9 42.0,108.7 45.4,107.5 48.8,106.3 52.1,105.1 55.5,103.9 58.9,102.7 62.3,101.5 65.6,100.2 69.0,99.0 72.4,97.8 75.8,96.6 79.1,95.4 82.5,94.2 85.9,93.0 89.2,91.8 92.6,90.6 96.0,89.4 99.4,88.1 102.8,86.9 106.1,85.7 109.5,84.5 112.9,83.3 116.2,82.1 119.6,80.9 123.0,79.7 126.4,78.5 129.8,77.3 133.1,76.0 136.5,74.8 139.9,73.6 143.2,72.4 146.6,71.2 150.0,70.0 153.4,68.8 156.8,67.6 160.1,66.4 163.5,65.2 166.9,64.0 170.3,62.7 173.6,61.5 177.0,60.3 180.4,59.1 183.8,57.9 187.1,56.7 190.5,55.5 193.9,54.3 197.2,53.1 200.6,51.9 204.0,50.6 207.4,49.4 210.8,48.2 214.1,47.0 217.5,45.8 220.9,44.6 224.2,43.4 227.6,42.2 231.0,41.0 234.4,39.8 237.8,38.5 241.1,37.3 244.5,36.1 247.9,34.9 251.2,33.7 254.6,32.5 258.0,31.3 261.4,30.1 264.8,28.9 268.1,27.7 271.5,26.5 274.9,25.2 278.2,24.0 281.6,22.8 285.0,21.6" fill="none" stroke="#2568A8" stroke-width="2.2"/>
+              <text x="12" y="139" font-family="IBM Plex Mono" font-size="9" fill="#6b7690">0</text>
+              <text x="79" y="139" font-family="IBM Plex Mono" font-size="9" fill="#6b7690">1</text>
+              <text x="147" y="139" font-family="IBM Plex Mono" font-size="9" fill="#6b7690">2</text>
+              <text x="214" y="139" font-family="IBM Plex Mono" font-size="9" fill="#6b7690">3</text>
+              <text x="281" y="139" font-family="IBM Plex Mono" font-size="9" fill="#6b7690">4</text>
+            </svg>
+          </div>
+          <div class="sketch-box">
+            <p class="graph-label">Graph B</p>
+            <svg viewBox="0 0 300 140" role="img" aria-label="Graph B: Kurve mit zwei Extrema">
+              <line x1="15" y1="10" x2="15" y2="130" stroke="#D9E1EA" stroke-width="1"/>
+              <line x1="15" y1="118.4" x2="285" y2="118.4" stroke="#D9E1EA" stroke-width="1" stroke-dasharray="4 3"/>
+              <polyline points="15.0,118.4 18.4,107.9 21.8,98.0 25.1,88.9 28.5,80.5 31.9,72.6 35.2,65.5 38.6,58.9 42.0,53.0 45.4,47.6 48.8,42.8 52.1,38.5 55.5,34.8 58.9,31.5 62.3,28.8 65.6,26.5 69.0,24.7 72.4,23.3 75.8,22.4 79.1,21.8 82.5,21.6 85.9,21.8 89.2,22.3 92.6,23.2 96.0,24.3 99.4,25.8 102.8,27.5 106.1,29.5 109.5,31.7 112.9,34.1 116.2,36.7 119.6,39.5 123.0,42.5 126.4,45.6 129.8,48.9 133.1,52.2 136.5,55.7 139.9,59.2 143.2,62.8 146.6,66.4 150.0,70.0 153.4,73.6 156.8,77.2 160.1,80.8 163.5,84.3 166.9,87.8 170.3,91.1 173.6,94.4 177.0,97.5 180.4,100.5 183.8,103.3 187.1,105.9 190.5,108.3 193.9,110.5 197.2,112.5 200.6,114.2 204.0,115.7 207.4,116.8 210.8,117.7 214.1,118.2 217.5,118.4 220.9,118.2 224.2,117.6 227.6,116.7 231.0,115.3 234.4,113.5 237.8,111.2 241.1,108.5 244.5,105.2 247.9,101.5 251.2,97.2 254.6,92.4 258.0,87.0 261.4,81.1 264.8,74.5 268.1,67.4 271.5,59.5 274.9,51.1 278.2,42.0 281.6,32.1 285.0,21.6" fill="none" stroke="#2568A8" stroke-width="2.2"/>
+              <text x="12" y="139" font-family="IBM Plex Mono" font-size="9" fill="#6b7690">0</text>
+              <text x="79" y="139" font-family="IBM Plex Mono" font-size="9" fill="#6b7690">1</text>
+              <text x="147" y="139" font-family="IBM Plex Mono" font-size="9" fill="#6b7690">2</text>
+              <text x="214" y="139" font-family="IBM Plex Mono" font-size="9" fill="#6b7690">3</text>
+              <text x="281" y="139" font-family="IBM Plex Mono" font-size="9" fill="#6b7690">4</text>
+            </svg>
+          </div>
+          <div class="sketch-box">
+            <p class="graph-label">Graph C</p>
+            <svg viewBox="0 0 300 140" role="img" aria-label="Graph C: nach oben geöffnete Parabel">
+              <line x1="15" y1="10" x2="15" y2="130" stroke="#D9E1EA" stroke-width="1"/>
+              <line x1="15" y1="94.2" x2="285" y2="94.2" stroke="#D9E1EA" stroke-width="1" stroke-dasharray="4 3"/>
+              <polyline points="15.0,21.6 18.4,26.4 21.8,31.0 25.1,35.6 28.5,40.0 31.9,44.3 35.2,48.5 38.6,52.5 42.0,56.5 45.4,60.3 48.8,64.0 52.1,67.5 55.5,71.0 58.9,74.3 62.3,77.5 65.6,80.6 69.0,83.5 72.4,86.4 75.8,89.1 79.1,91.7 82.5,94.2 85.9,96.6 89.2,98.8 92.6,100.9 96.0,102.9 99.4,104.8 102.8,106.5 106.1,108.2 109.5,109.7 112.9,111.1 116.2,112.3 119.6,113.5 123.0,114.5 126.4,115.4 129.8,116.2 133.1,116.9 136.5,117.4 139.9,117.8 143.2,118.1 146.6,118.3 150.0,118.4 153.4,118.3 156.8,118.1 160.1,117.8 163.5,117.4 166.9,116.9 170.3,116.2 173.6,115.4 177.0,114.5 180.4,113.5 183.8,112.3 187.1,111.1 190.5,109.7 193.9,108.2 197.2,106.5 200.6,104.8 204.0,102.9 207.4,100.9 210.8,98.8 214.1,96.6 217.5,94.2 220.9,91.7 224.2,89.1 227.6,86.4 231.0,83.5 234.4,80.6 237.8,77.5 241.1,74.3 244.5,71.0 247.9,67.5 251.2,64.0 254.6,60.3 258.0,56.5 261.4,52.5 264.8,48.5 268.1,44.3 271.5,40.0 274.9,35.6 278.2,31.0 281.6,26.4 285.0,21.6" fill="none" stroke="#2568A8" stroke-width="2.2"/>
+              <text x="12" y="139" font-family="IBM Plex Mono" font-size="9" fill="#6b7690">0</text>
+              <text x="79" y="139" font-family="IBM Plex Mono" font-size="9" fill="#6b7690">1</text>
+              <text x="147" y="139" font-family="IBM Plex Mono" font-size="9" fill="#6b7690">2</text>
+              <text x="214" y="139" font-family="IBM Plex Mono" font-size="9" fill="#6b7690">3</text>
+              <text x="281" y="139" font-family="IBM Plex Mono" font-size="9" fill="#6b7690">4</text>
+            </svg>
+          </div>
+        </div>
+        <p style="margin-top:0.9rem;">Graph B hat zwei Punkte mit waagerechter Tangente (bei x = 1 und x = 3) — das passt zu einer Funktion 3. Grades mit zwei Extremstellen: <strong>B = f</strong>.</p>
+        <p>Genau an diesen beiden Stellen (x = 1 und x = 3) muss die Ableitung von f eine Nullstelle haben. Graph C, eine nach oben geöffnete Parabel, schneidet die gestrichelte Nulllinie exakt bei x = 1 und x = 3: <strong>C = f'</strong>.</p>
+        <p>Der Scheitelpunkt von C (Minimum von f') liegt bei x = 2 — dort muss f'' den Wert 0 annehmen. Graph A, eine Gerade, kreuzt ihre Nulllinie exakt bei x = 2: <strong>A = f''</strong>.</p>
+        <div class="result">A = f'' · B = f · C = f'</div>
+        <p class="note">Merkregel: Extremstellen von f ↔ Nullstellen von f' · Wendestellen von f (= Extremstellen von f') ↔ Nullstellen von f''.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">b</span><span class="tag">§08 Bestimmen</span></div>
+    <p class="aufgabenstellung">Eine ganzrationale Funktion 3. Grades \(p(x)=ax^3+bx^2+cx+d\) hat folgende Eigenschaften: Ihr Graph verläuft durch den Ursprung, hat dort eine waagerechte Tangente, und besitzt bei x = 2 ein lokales Maximum mit dem Wert 4. Bestimmen Sie den Funktionsterm.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Übersetzen der Bedingungen: \(p(0)=0\) (durch den Ursprung), \(p'(0)=0\) (waagerechte Tangente dort), \(p(2)=4\) und \(p'(2)=0\) (Maximum bei x = 2).</p>
+        <p>Mit \(p'(x)=3ax^2+2bx+c\): Aus \(p(0)=d=0\) folgt \(d=0\). Aus \(p'(0)=c=0\) folgt \(c=0\). Damit vereinfacht sich das System zu
+        \[p(2)=8a+4b=4 \qquad p'(2)=12a+4b=0\]
+        Aus der zweiten Gleichung: \(b=-3a\). Eingesetzt in die erste: \(8a-12a=4 \Rightarrow -4a=4 \Rightarrow a=-1\), also \(b=3\).</p>
+        <div class="result">p(x) = −x³ + 3x²</div>
+        <p>Probe: \(p(2)=-8+12=4\) ✓, \(p'(x)=-3x^2+6x=-3x(x-2)\), also \(p'(2)=0\) ✓, und \(p''(2)=-6\cdot2+6=-6<0\) bestätigt tatsächlich ein Maximum.</p>
+      </div>
+    </details>
+  </div>
+  <a class="backlink" href="#top">↑ Zur Übersicht</a>
+</section>
+
+<!-- ========================= AUFGABE 4 ========================= -->
+<section class="aufgabe" id="a4">
+  <div class="aufgabe-head">
+    <span class="eyebrow">Aufgabe 04</span>
+    <h2>Tangenten und Berührpunkte</h2>
+  </div>
+  <p class="context">Zwei Kurven „berühren" sich in einem Punkt, wenn sie dort denselben Funktionswert <em>und</em> dieselbe Steigung besitzen. Diese Aufgabe zeigt zwei gängige Lösungswege für diese Bedingung.</p>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">a</span><span class="tag">§11 Berührpunkt</span></div>
+    <p class="aufgabenstellung">Für welche Werte von k berührt die Ursprungsgerade \(g_k(x)=kx\) den Graphen von f aus Aufgabe 1? Geben Sie jeweils den Berührpunkt an.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Berührung bei \(x_0\) bedeutet: gleicher Funktionswert \(f(x_0)=k x_0\) <em>und</em> gleiche Steigung \(f'(x_0)=k\). Setzt man die zweite Gleichung in die erste ein, entfällt k:
+        \[f(x_0)=x_0\cdot f'(x_0)\]
+        \[x_0^3-6x_0^2+9x_0 = x_0(3x_0^2-12x_0+9)\]
+        \[x_0^3-6x_0^2+9x_0 = 3x_0^3-12x_0^2+9x_0\]
+        \[0=2x_0^3-6x_0^2=2x_0^2(x_0-3)\]</p>
+        <p>Also \(x_0=0\) (doppelt) oder \(x_0=3\).</p>
+        <p>Für \(x_0=0\): \(k=f'(0)=9\), Berührpunkt (0|0). Für \(x_0=3\): \(k=f'(3)=0\), Berührpunkt (3|0).</p>
+        <div class="result">k = 9 → Berührpunkt (0|0) · k = 0 → Berührpunkt (3|0)</div>
+        <p class="note">Der Fall k = 0 ist genau die x-Achse selbst — und bestätigt noch einmal die doppelte Nullstelle bei x = 3 aus Aufgabe 1b): Dort „berührt" f die x-Achse im selben Sinn, in dem hier eine Gerade den Graphen berührt.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">b</span><span class="tag">§11 Berührpunkt</span></div>
+    <p class="aufgabenstellung">Für welchen Wert von c berührt die Gerade \(h_c(x)=4x+c\) die Normalparabel \(k(x)=x^2\)? Nutzen Sie diesmal die Diskriminante.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Schnittpunkte ergeben sich aus \(x^2=4x+c\), also \(x^2-4x-c=0\). Berührung liegt genau dann vor, wenn diese Gleichung eine <strong>doppelte</strong> Lösung hat, die Diskriminante also null ist:
+        \[D=16+4c=0 \Rightarrow c=-4\]</p>
+        <p>Der Berührpunkt liegt bei \(x=\frac{4}{2}=2\), also \(y=k(2)=4\).</p>
+        <div class="result">c = −4 · Berührpunkt (2|4)</div>
+        <p class="note">Beide Methoden — Steigung gleichsetzen (a) oder Diskriminante null setzen (b) — laufen letztlich auf dasselbe hinaus: eine <em>doppelte</em> Nullstelle der Differenzfunktion zwischen den beiden Kurven.</p>
+      </div>
+    </details>
+  </div>
+  <a class="backlink" href="#top">↑ Zur Übersicht</a>
+</section>
+
+<!-- ========================= AUFGABE 5 ========================= -->
+<section class="aufgabe" id="a5">
+  <div class="aufgabe-head">
+    <span class="eyebrow">Aufgabe 05</span>
+    <h2>Die optimale Schachtel</h2>
+  </div>
+  <p class="context">Aus einem quadratischen Blech der Seitenlänge 12 cm soll durch Ausschneiden gleich großer Quadrate an den vier Ecken und Hochbiegen der entstehenden Klappen eine oben offene Schachtel mit möglichst großem Volumen gebaut werden. Die Seitenlänge der ausgeschnittenen Eckquadrate wird mit x bezeichnet.</p>
+
+  <div class="sketch-box">
+    <svg viewBox="0 0 220 220" role="img" aria-label="Skizze: quadratisches Blech mit ausgeschnittenen Eckquadraten">
+      <line x1="30" y1="14" x2="170" y2="14" stroke="#6b7690" stroke-width="1"/>
+      <line x1="30" y1="10" x2="30" y2="18" stroke="#6b7690" stroke-width="1"/>
+      <line x1="170" y1="10" x2="170" y2="18" stroke="#6b7690" stroke-width="1"/>
+      <text x="90" y="10" font-family="IBM Plex Mono" font-size="11" fill="#6b7690">12</text>
+      <rect x="30" y="30" width="140" height="140" fill="none" stroke="#1A2B47" stroke-width="2"/>
+      <rect x="30" y="30" width="30" height="30" fill="#FBF3E7" stroke="#A9752E" stroke-width="1.3" stroke-dasharray="3 2"/>
+      <rect x="140" y="30" width="30" height="30" fill="#FBF3E7" stroke="#A9752E" stroke-width="1.3" stroke-dasharray="3 2"/>
+      <rect x="30" y="140" width="30" height="30" fill="#FBF3E7" stroke="#A9752E" stroke-width="1.3" stroke-dasharray="3 2"/>
+      <rect x="140" y="140" width="30" height="30" fill="#FBF3E7" stroke="#A9752E" stroke-width="1.3" stroke-dasharray="3 2"/>
+      <rect x="60" y="60" width="80" height="80" fill="#EAF1FA" stroke="#2568A8" stroke-width="1.5" stroke-dasharray="5 3"/>
+      <text x="38" y="49" font-family="IBM Plex Mono" font-size="11" fill="#A9752E">x</text>
+      <text x="95" y="103" font-family="IBM Plex Mono" font-size="10" fill="#2568A8">Boden</text>
+    </svg>
+    <p style="font-size:0.85rem; color:#6b7690; text-align:center; margin-top:0.3rem;">Amber = ausgeschnittene Eckquadrate (Seite x) · Blau gestrichelt = Boden der Schachtel, die vier verbleibenden Klappen werden hochgeklappt.</p>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">a</span><span class="tag">§10 Zielfunktion</span></div>
+    <p class="aufgabenstellung">Stellen Sie die Volumenfunktion V(x) auf und geben Sie einen sinnvollen Definitionsbereich an.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Die Grundfläche der Schachtel hat nach dem Ausschneiden die Seitenlänge \((12-2x)\), die Höhe entspricht der Klappenbreite x. Volumen = Grundfläche · Höhe:
+        \[V(x)=x\cdot(12-2x)^2,\qquad 0<x<6\]</p>
+        <p class="note">Für \(x\leq0\) oder \(x\geq6\) entsteht keine echte Schachtel mehr (Höhe bzw. Grundfläche würde 0 oder negativ), daher der offene Definitionsbereich.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">b</span><span class="tag">§10 Extremwertaufgabe</span></div>
+    <p class="aufgabenstellung">Bestimmen Sie, für welches x das Volumen maximal wird, und berechnen Sie dieses maximale Volumen. Weisen Sie das Maximum hinreichend nach.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Ausmultipliziert: \(V(x)=x(144-48x+4x^2)=4x^3-48x^2+144x\).
+        \[V'(x)=12x^2-96x+144=12(x^2-8x+12)=12(x-2)(x-6)\]</p>
+        <p>Nullstellen von \(V'\): \(x=2\) und \(x=6\). Da \(x=6\) außerhalb des offenen Definitionsbereichs \((0;6)\) liegt, bleibt nur \(x=2\) als Kandidat.</p>
+        <p>Hinreichend: \(V''(x)=24x-96\), also \(V''(2)=48-96=-48<0\) ⇒ Maximum. \(V(2)=4\cdot8-48\cdot4+144\cdot2=32-192+288=128\).</p>
+        <div class="result">x = 2 cm · V(2) = 128 cm³</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">c</span><span class="tag">§09 Interpretieren</span><span class="tag">§10 Extremwertaufgabe</span></div>
+    <p class="aufgabenstellung">Prüfen Sie das Verhalten von V an den Rändern des Definitionsbereichs und interpretieren Sie, warum x = 2 tatsächlich das globale Maximum liefert. Geben Sie die Maße der optimalen Schachtel an.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Am Rand gilt \(V(0)=0\) und \(V(6)=6\cdot0^2=0\) (Grenzfälle, praktisch keine Schachtel). Da V auf \((0;6)\) stetig ist, an beiden Rändern gegen 0 strebt und nur eine einzige innere Extremstelle (x = 2) besitzt, muss diese das globale Maximum auf dem gesamten Intervall sein.</p>
+        <div class="result">Optimale Schachtel: Grundfläche 8 cm × 8 cm, Höhe 2 cm, Volumen 128 cm³</div>
+        <p>Von den 144 cm² Blechfläche (12 × 12) werden also vier Eckquadrate à 4 cm² (Seite 2 cm) entfernt, um dieses maximale Volumen zu erreichen.</p>
+      </div>
+    </details>
+  </div>
+  <a class="backlink" href="#top">↑ Zur Übersicht</a>
+</section>
+
+<!-- ========================= AUFGABE 6 ========================= -->
+<section class="aufgabe" id="a6">
+  <div class="aufgabe-head">
+    <span class="eyebrow">Aufgabe 06</span>
+    <h2>Die Kurvenschar \(f_a\)</h2>
+  </div>
+  <p class="context">Gegeben ist die Funktionenschar \(f_a(x)=-x^3+ax^2\) mit Parameter \(a>0\) und \(x\in\mathbb{R}\).</p>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">a</span><span class="tag">§12 Parameter</span><span class="tag">§04 Nullstellen</span></div>
+    <p class="aufgabenstellung">Bestimmen Sie die Nullstellen von \(f_a\) in Abhängigkeit von a.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Ausklammern: \(f_a(x)=x^2(a-x)\). Für \(a>0\) ergeben sich zwei Nullstellen: \(x=0\) (doppelt) und \(x=a\) (einfach).</p>
+        <div class="result">x = 0 (doppelt) · x = a (einfach)</div>
+        <p class="note">Sonderfall \(a=0\): dann ist \(f_0(x)=-x^3\) und beide Nullstellen fallen zu einer <em>dreifachen</em> Nullstelle bei x = 0 zusammen.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">b</span><span class="tag">§12 Parameter</span><span class="tag">§07 Extrempunkte</span></div>
+    <p class="aufgabenstellung">Bestimmen Sie die Extrempunkte von \(f_a\) in Abhängigkeit von a.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>\(f_a'(x)=-3x^2+2ax=x(2a-3x)\), Nullstellen \(x=0\) und \(x=\frac{2a}{3}\). Mit \(f_a''(x)=-6x+2a\):</p>
+        <p>\(f_a''(0)=2a>0\) (da \(a>0\)) ⇒ Minimum bei x = 0 mit \(f_a(0)=0\).
+        \(f_a''\!\left(\frac{2a}{3}\right)=-4a+2a=-2a<0\) ⇒ Maximum bei \(x=\frac{2a}{3}\) mit
+        \[f_a\!\left(\frac{2a}{3}\right)=-\frac{8a^3}{27}+a\cdot\frac{4a^2}{9}=\frac{4a^3}{27}\]</p>
+        <div class="result">Minimum: TP(0|0) · Maximum: HP( 2a/3 | 4a³/27 )</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">c</span><span class="tag">§12 Ortskurve</span></div>
+    <p class="aufgabenstellung">Bestimmen Sie eine Gleichung der Ortskurve, auf der alle Maxima aus b) für variables a liegen.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Die Koordinaten des Maximums hängen über den Parameter a zusammen: \(x=\frac{2a}{3}\) und \(y=\frac{4a^3}{27}\). Aus der ersten Gleichung folgt \(a=\frac{3x}{2}\); eingesetzt in die zweite:
+        \[y=\frac{4}{27}\left(\frac{3x}{2}\right)^3=\frac{4}{27}\cdot\frac{27x^3}{8}=\frac{x^3}{2}\]</p>
+        <div class="result">Ortskurve: y = x³/2 (für x &gt; 0)</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">d</span><span class="tag">§12 Parameter</span></div>
+    <p class="aufgabenstellung">Für welchen Wert von a liegt das Maximum von \(f_a\) genau bei x = 1? Geben Sie auch den zugehörigen Funktionswert an.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Aus b) liegt das Maximum bei \(x=\frac{2a}{3}\). Gleichsetzen mit 1: \(\frac{2a}{3}=1 \Rightarrow a=\frac32\).</p>
+        <p>Funktionswert: \(f_{3/2}(1)=-1+\frac32\cdot1=\frac12\).</p>
+        <div class="result">a = 3/2 · Maximum bei (1 | 0,5)</div>
+        <p class="note">Gegenprobe über die Ortskurve aus c): \(y=\frac{x^3}{2}\) liefert bei x = 1 ebenfalls \(y=\frac12\) — stimmt überein.</p>
+      </div>
+    </details>
+  </div>
+  <a class="backlink" href="#top">↑ Zur Übersicht</a>
+</section>
+
+</main>
+<footer>Alle Ergebnisse mit exakter Rechnung (sympy) gegengeprüft.</footer>
+</div>
+</body>
+</html>

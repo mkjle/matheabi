@@ -1,0 +1,6 @@
+{
+  "name": "HTML Viewer Tabs",
+  "description": "An application featuring two tabs that display separate HTML files.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

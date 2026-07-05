@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stochastik – mündliches Abitur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  chtml: { scale: 1.0 }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js" id="mathjax-script"></script>
+<style>
+  :root{
+    --paper:#FAFBFC; --grid:#E7ECF3; --ink:#1A2B47; --body:#2D3648;
+    --blue:#2568A8; --blue-tint:#EAF1FA; --teal:#2F7566; --teal-tint:#E7F3EF;
+    --amber:#A9752E; --amber-tint:#FBF3E7; --line:#D9E1EA;
+    --mono:'IBM Plex Mono',monospace; --serif:'Source Serif 4',Georgia,serif; --disp:'Space Grotesk',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/28px 28px,
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/28px 28px,
+      var(--paper);
+    color:var(--body); font-family:var(--serif); line-height:1.62; font-size:16.5px;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:740px; margin:0 auto; padding:1.6rem 1.1rem 4rem;}
+  header.top{padding-top:0.4rem;}
+  .eyebrow{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.14em; color:var(--blue);
+    text-transform:uppercase; display:block; margin-bottom:0.5rem;
+  }
+  h1{
+    font-family:var(--disp); font-weight:700; color:var(--ink); font-size:1.85rem;
+    margin:0 0 0.35rem; letter-spacing:-0.01em; line-height:1.15;
+  }
+  .sub{color:var(--body); font-size:1.02rem; margin:0 0 1.1rem; max-width:56ch;}
+  .intro-note{
+    font-size:0.96rem; border-left:3px solid var(--blue); padding:0.55rem 0 0.55rem 0.9rem;
+    background:rgba(37,104,168,0.045); border-radius:0 6px 6px 0; margin-bottom:1.6rem;
+  }
+  .intro-note strong{color:var(--ink);}
+  table.checklist{
+    width:100%; border-collapse:collapse; font-size:0.86rem; margin-bottom:1.9rem;
+    background:#fff; border:1px solid var(--line); border-radius:8px; overflow:hidden;
+  }
+  table.checklist caption{
+    font-family:var(--disp); font-weight:600; font-size:0.78rem; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--ink); text-align:left; padding:0.7rem 0.8rem 0.5rem;
+    background:#fff;
+  }
+  table.checklist th{
+    font-family:var(--mono); font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase;
+    color:#6b7690; text-align:left; padding:0.4rem 0.8rem; border-bottom:1px solid var(--line);
+  }
+  table.checklist td{
+    padding:0.5rem 0.8rem; border-bottom:1px solid var(--line); vertical-align:top;
+  }
+  table.checklist tr:last-child td{border-bottom:none;}
+  table.checklist td.num{font-family:var(--mono); color:var(--blue); white-space:nowrap;}
+  table.checklist td.ref{font-family:var(--mono); color:var(--amber); white-space:nowrap; font-size:0.8rem;}
+  nav.jump{display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:2.2rem;}
+  nav.jump a{
+    font-family:var(--mono); font-size:0.78rem; color:var(--ink); text-decoration:none;
+    border:1px solid var(--line); background:#fff; padding:0.4rem 0.7rem; border-radius:20px;
+  }
+  nav.jump a:hover{border-color:var(--blue); color:var(--blue);}
+  section.aufgabe{
+    background:#fff; border:1px solid var(--line); border-radius:12px;
+    padding:1.4rem 1.3rem 1.6rem; margin-bottom:1.8rem; scroll-margin-top:1rem;
+  }
+  .aufgabe-head .eyebrow{margin-bottom:0.3rem;}
+  section.aufgabe h2{
+    font-family:var(--disp); font-weight:600; color:var(--ink); font-size:1.32rem; margin:0 0 0.7rem;
+  }
+  p.context{font-size:0.98rem; margin:0 0 1.2rem; padding-bottom:1.1rem; border-bottom:1px dashed var(--line);}
+  .teil{margin-bottom:1.35rem;}
+  .teil:last-of-type{margin-bottom:0.4rem;}
+  .teil-head{display:flex; align-items:center; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.45rem;}
+  .teil-letter{
+    font-family:var(--disp); font-weight:700; color:#fff; background:var(--ink);
+    width:1.55rem; height:1.55rem; border-radius:50%; display:inline-flex; align-items:center;
+    justify-content:center; font-size:0.78rem; flex:none;
+  }
+  .tag{
+    font-family:var(--mono); font-size:0.66rem; padding:0.16rem 0.45rem; background:var(--blue-tint);
+    color:var(--blue); border-radius:4px; border:1px solid rgba(37,104,168,0.22); white-space:nowrap;
+  }
+  p.aufgabenstellung{margin:0 0 0.6rem; font-size:0.99rem;}
+  .pt{font-family:var(--mono); font-size:0.94em; color:var(--ink);}
+  details.solution{border:1px solid var(--line); border-radius:8px; background:#fff; margin-top:0.5rem;}
+  details.solution summary{
+    cursor:pointer; list-style:none; padding:0.55rem 0.9rem; font-family:var(--disp); font-weight:600;
+    font-size:0.82rem; letter-spacing:0.02em; color:var(--teal); background:var(--teal-tint);
+    border-radius:8px; display:flex; align-items:center; gap:0.5rem; user-select:none;
+  }
+  details.solution summary::-webkit-details-marker{display:none;}
+  details.solution summary::marker{content:'';}
+  details.solution summary::before{content:'▸'; transition:transform 0.15s ease; font-size:0.75rem;}
+  details.solution[open] summary::before{transform:rotate(90deg);}
+  details.solution[open] summary{border-radius:8px 8px 0 0;}
+  details.solution summary .hide{display:none;}
+  details.solution[open] summary .show{display:none;}
+  details.solution[open] summary .hide{display:inline;}
+  .sol-body{padding:0.95rem 1.05rem 1.1rem; font-size:0.95rem;}
+  .sol-body p{margin:0 0 0.65rem;}
+  .sol-body p:last-child{margin-bottom:0;}
+  .note{
+    font-size:0.88rem; background:var(--amber-tint); border-left:3px solid var(--amber);
+    padding:0.5rem 0.8rem; border-radius:0 6px 6px 0; margin-top:0.7rem;
+  }
+  .result{
+    font-family:var(--mono); background:var(--blue-tint); border-radius:6px; padding:0.5rem 0.75rem;
+    display:inline-block; margin-top:0.2rem; font-size:0.92rem; color:var(--ink);
+  }
+  mjx-container{overflow-x:auto; overflow-y:hidden; max-width:100%;}
+  .sketch-box{margin-top:0.6rem;}
+  .sketch-box svg{width:100%; max-width:420px; height:auto; display:block; margin:0 auto;}
+  .backlink{
+    display:inline-block; margin-top:0.6rem; font-family:var(--mono); font-size:0.76rem;
+    color:#8592a8; text-decoration:none;
+  }
+  .backlink:hover{color:var(--blue);}
+  footer{text-align:center; font-size:0.85rem; color:#8592a8; padding-top:0.8rem;}
+
+  /* ---- Balkendiagramme (Verteilung / Histogramm) ---- */
+  .barchart{
+    display:flex; align-items:flex-end; justify-content:center; gap:2.1rem;
+    height:200px; margin:0.9rem 0 0.3rem; padding:0 0.4rem;
+  }
+  .bar-col{display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%;}
+  .bar-val{font-family:var(--mono); font-size:0.7rem; color:var(--ink); margin-bottom:0.3rem; white-space:nowrap;}
+  .bar{width:44px; background:linear-gradient(180deg, var(--blue), #1d5488); border-radius:5px 5px 0 0;}
+  .bar-lbl{font-family:var(--mono); font-size:0.72rem; color:#6b7690; margin-top:0.4rem; white-space:nowrap; text-align:center;}
+  .hist{gap:0.32rem;}
+  .hist .bar-col{width:32px;}
+  .hist .bar{width:100%;}
+  .hist .bar.hl{background:linear-gradient(180deg, var(--teal), #1d5c4e);}
+  .hist .bar-val{font-size:0.62rem;}
+  .hist .bar-lbl{font-size:0.68rem;}
+  .chart-caption{font-size:0.82rem; color:#6b7690; text-align:center; margin-top:0.3rem;}
+
+  /* ---- Glockenkurven (SVG) ---- */
+  .bell-wrap{margin:0.9rem 0 0.2rem;}
+  .bell-wrap svg{width:100%; max-width:560px; display:block; margin:0 auto;}
+  .bell-axis{stroke:#94a3b8; stroke-width:1.2;}
+  .bell-curve{fill:none; stroke:var(--blue); stroke-width:2.6; stroke-linecap:round;}
+  .bell-curve.alt{stroke:var(--amber);}
+  .bell-grid{stroke:var(--line); stroke-width:1; stroke-dasharray:3 3;}
+  .bell-grid.strong{stroke:#9db3c9; stroke-dasharray:4 3;}
+  .bell-lbl{font-family:var(--mono); font-size:10.5px; fill:#5b6780;}
+  .bell-lbl.strong{fill:var(--ink); font-weight:600;}
+  .bell-dot{fill:var(--ink);}
+  .bell-dot.alt{fill:var(--amber);}
+
+  /* ---- Vierfeldertafel ---- */
+  table.vft{
+    width:100%; border-collapse:collapse; font-size:0.92rem; margin:0.8rem 0; background:#fff;
+  }
+  table.vft th, table.vft td{
+    border:1px solid var(--line); padding:0.5rem 0.6rem; text-align:center; font-family:var(--mono);
+  }
+  table.vft th{background:var(--blue-tint); color:var(--ink); font-weight:600; font-size:0.82rem;}
+  table.vft td.rowhead{background:var(--blue-tint); color:var(--ink); font-weight:600; text-align:left; font-family:var(--serif); font-style:italic;}
+  table.vft td.sum{background:var(--amber-tint); font-weight:600;}
+  table.vft td.blank{color:#b7c1cf;}
+  table.vft td.filled{color:var(--teal); font-weight:600;}
+
+  /* ---- Baumdiagramm ---- */
+  .tree-wrap{margin:0.8rem 0 0.3rem;}
+  .tree-wrap svg{width:100%; max-width:480px; display:block; margin:0 auto;}
+  .tree-edge{stroke:#94a3b8; stroke-width:1.4; fill:none;}
+  .tree-edge.hl{stroke:var(--teal); stroke-width:2.4;}
+  .tree-node{fill:var(--ink);}
+  .tree-lbl{font-family:var(--mono); font-size:11px; fill:var(--ink);}
+  .tree-lbl.p{fill:var(--blue); font-size:10.5px;}
+  .tree-lbl.p.hl{fill:var(--teal); font-weight:600;}
+  .tree-lbl.leaf{fill:#5b6780; font-size:10px;}
+  .tree-lbl.leaf.hl{fill:var(--teal); font-weight:600;}
+
+  @media (max-width:480px){
+    h1{font-size:1.55rem;}
+    section.aufgabe{padding:1.1rem 0.9rem 1.3rem;}
+    table.checklist{font-size:0.78rem;}
+    table.checklist td, table.checklist th{padding:0.4rem 0.5rem;}
+    .barchart{gap:1.1rem; height:170px;}
+    .bar{width:36px;}
+    table.vft{font-size:0.78rem;}
+    table.vft th, table.vft td{padding:0.35rem 0.3rem;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top" id="top">
+  <span class="eyebrow">Mündliches Abitur · Mathematik · Stochastik</span>
+  <h1>Stochastik</h1>
+  <p class="sub">Vier zusammenhängende Aufgabenkomplexe, die zusammen alle 17 von dir genannten Anforderungen abdecken.</p>
+  <div class="intro-note">
+    <strong>Wahrscheinlichkeiten berechnen</strong> steckt bewusst nicht als eigene Mini-Aufgabe drin — dieses Handwerkszeug brauchst du in praktisch jeder Teilaufgabe, genau wie in echten Prüfungen auch. Alle anderen 16 Anforderungen haben eine klar erkennbare eigene Teilaufgabe. Versuch jede Teilaufgabe zuerst selbst — sprich deinen Lösungsweg dabei laut mit, denn genau das wird in der mündlichen Prüfung verlangt, nicht nur das Endergebnis.
+  </div>
+
+  <table class="checklist">
+    <caption>Abdeckung deiner 17 Anforderungen</caption>
+    <tr><th>§</th><th>Thema</th><th>Aufgabe</th></tr>
+    <tr><td class="num">01</td><td>Pfadmultiplikations- & Pfadsummenregel</td><td class="ref">1b</td></tr>
+    <tr><td class="num">02</td><td>Erwartungswert</td><td class="ref">1c</td></tr>
+    <tr><td class="num">03</td><td>Wahrscheinlichkeitsverteilung aufstellen</td><td class="ref">1a</td></tr>
+    <tr><td class="num">04</td><td>Kumulierte Wahrscheinlichkeit</td><td class="ref">1e · 2c</td></tr>
+    <tr><td class="num">05</td><td>Formel von Bernoulli</td><td class="ref">2a</td></tr>
+    <tr><td class="num">06</td><td>Vierfeldertafel ausfüllen</td><td class="ref">4a</td></tr>
+    <tr><td class="num">07</td><td>Wahrscheinlichkeiten berechnen</td><td class="ref">durchgehend</td></tr>
+    <tr><td class="num">08</td><td>Glücksspiel anpassen</td><td class="ref">1d</td></tr>
+    <tr><td class="num">09</td><td>Histogramme interpretieren</td><td class="ref">2d</td></tr>
+    <tr><td class="num">10</td><td>Rechnen mit µ und σ</td><td class="ref">2e · 3a</td></tr>
+    <tr><td class="num">11</td><td>Änderungen im Histogramm (µ, σ)</td><td class="ref">3d</td></tr>
+    <tr><td class="num">12</td><td>Bedingte Wahrscheinlichkeit</td><td class="ref">4c</td></tr>
+    <tr><td class="num">13</td><td>Stochastische Unabhängigkeit</td><td class="ref">4d</td></tr>
+    <tr><td class="num">14</td><td>Baumdiagramm ↔ Vierfeldertafel</td><td class="ref">4e</td></tr>
+    <tr><td class="num">15</td><td>Eigenschaften der Glockenfunktion</td><td class="ref">3b</td></tr>
+    <tr><td class="num">16</td><td>Sigma-Regel & Symmetrie</td><td class="ref">3c</td></tr>
+    <tr><td class="num">17</td><td>Parameter n, p, k, µ, σ ermitteln</td><td class="ref">2b</td></tr>
+  </table>
+
+  <nav class="jump">
+    <a href="#a1">Aufgabe 1 · Glücksrad</a>
+    <a href="#a2">Aufgabe 2 · Bernoulli-Kette</a>
+    <a href="#a3">Aufgabe 3 · Glockenform</a>
+    <a href="#a4">Aufgabe 4 · Vierfeldertafel</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ========================= AUFGABE 1 ========================= -->
+<section class="aufgabe" id="a1">
+  <div class="aufgabe-head">
+    <span class="eyebrow">Aufgabe 01</span>
+    <h2>Das Glücksrad</h2>
+  </div>
+  <p class="context">Ein Glücksrad ist in 8 gleich große Sektoren geteilt: 4 grüne, 3 blaue und 1 roter Sektor. Bei jedem Spiel wird das Rad einmal gedreht. Die Zufallsgröße X gibt den Gewinn in Euro an: Grün bringt 0&nbsp;€, Blau bringt 2&nbsp;€, Rot bringt 10&nbsp;€.</p>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">a</span><span class="tag">§03 Verteilung aufstellen</span></div>
+    <p class="aufgabenstellung">Stellen Sie die Wahrscheinlichkeitsverteilung der Zufallsgröße X auf und begründen Sie, warum es sich dabei tatsächlich um eine vollständige Wahrscheinlichkeitsverteilung handelt.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>X kann die Werte 0, 2 und 10 annehmen, mit Wahrscheinlichkeiten entsprechend der Sektorenanzahl:
+        \[P(X=0)=\frac48=\frac12,\qquad P(X=2)=\frac38,\qquad P(X=10)=\frac18\]</p>
+        <div class="barchart" role="img" aria-label="Balkendiagramm der Wahrscheinlichkeitsverteilung von X">
+          <div class="bar-col"><div class="bar-val">0,5</div><div class="bar" style="height:130px"></div><div class="bar-lbl">X = 0 €</div></div>
+          <div class="bar-col"><div class="bar-val">0,375</div><div class="bar" style="height:97px"></div><div class="bar-lbl">X = 2 €</div></div>
+          <div class="bar-col"><div class="bar-val">0,125</div><div class="bar" style="height:33px"></div><div class="bar-lbl">X = 10 €</div></div>
+        </div>
+        <p>Eine Wahrscheinlichkeitsverteilung liegt genau dann vor, wenn jedem möglichen Wert von X eine Wahrscheinlichkeit \(\geq 0\) zugeordnet ist und sich alle Wahrscheinlichkeiten zu 1 aufsummieren. Probe:
+        \[\frac12+\frac38+\frac18=\frac48+\frac38+\frac18=\frac88=1\ \checkmark\]</p>
+        <div class="result">X: 0 | 2 | 10  —  P: 0,5 | 0,375 | 0,125 (Summe = 1)</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">b</span><span class="tag">§01 Pfadsummenregel</span></div>
+    <p class="aufgabenstellung">Das Glücksrad wird zweimal hintereinander gedreht. Berechnen Sie mithilfe der Pfadmultiplikations- und der Pfadsummenregel die Wahrscheinlichkeit, dass der Gesamtgewinn aus beiden Spielen genau 12&nbsp;€ beträgt.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Ein Gesamtgewinn von genau 12&nbsp;€ entsteht nur durch die Kombination „Blau, dann Rot" (2+10=12) oder „Rot, dann Blau" (10+2=12) — bei keiner Kombination mit Grün kommt 12 heraus. Es genügt daher, den Teilbaum ab Grün nicht auszuführen.</p>
+        <div class="tree-wrap">
+          <svg viewBox="0 0 460 300" role="img" aria-label="Baumdiagramm für zwei Drehungen des Glücksrads, Pfade zu Grün nicht ausgeführt">
+            <path class="tree-edge" d="M40,150 L150,50"/>
+            <path class="tree-edge" d="M40,150 L150,150"/>
+            <path class="tree-edge" d="M40,150 L150,250"/>
+            <path class="tree-edge" d="M150,150 L320,110"/>
+            <path class="tree-edge" d="M150,150 L320,150"/>
+            <path class="tree-edge hl" d="M150,150 L320,190"/>
+            <path class="tree-edge" d="M150,250 L320,210"/>
+            <path class="tree-edge hl" d="M150,250 L320,250"/>
+            <path class="tree-edge" d="M150,250 L320,290"/>
+            <circle class="tree-node" cx="40" cy="150" r="3.5"/>
+            <circle class="tree-node" cx="150" cy="50" r="3.5"/>
+            <circle class="tree-node" cx="150" cy="150" r="3.5"/>
+            <circle class="tree-node" cx="150" cy="250" r="3.5"/>
+            <circle class="tree-node" cx="320" cy="110" r="3"/>
+            <circle class="tree-node" cx="320" cy="150" r="3"/>
+            <circle class="tree-node" cx="320" cy="190" r="3"/>
+            <circle class="tree-node" cx="320" cy="210" r="3"/>
+            <circle class="tree-node" cx="320" cy="250" r="3"/>
+            <circle class="tree-node" cx="320" cy="290" r="3"/>
+            <text class="tree-lbl p" x="82" y="90">4/8</text>
+            <text class="tree-lbl p" x="82" y="145">3/8</text>
+            <text class="tree-lbl p" x="82" y="215">1/8</text>
+            <text class="tree-lbl" x="152" y="45">Grün (1. Spiel)</text>
+            <text class="tree-lbl" x="152" y="145">Blau (1. Spiel)</text>
+            <text class="tree-lbl" x="152" y="245">Rot (1. Spiel)</text>
+            <text class="tree-lbl leaf" x="325" y="50">… (hier nicht benötigt)</text>
+            <text class="tree-lbl p" x="220" y="122">4/8</text>
+            <text class="tree-lbl p" x="220" y="148">3/8</text>
+            <text class="tree-lbl p hl" x="220" y="184">1/8</text>
+            <text class="tree-lbl p" x="220" y="204">4/8</text>
+            <text class="tree-lbl p hl" x="220" y="248">3/8</text>
+            <text class="tree-lbl p" x="220" y="288">1/8</text>
+            <text class="tree-lbl leaf" x="325" y="114">Grün → 0+0=0</text>
+            <text class="tree-lbl leaf" x="325" y="154">Blau → 2+2=4</text>
+            <text class="tree-lbl leaf hl" x="325" y="194">Rot → 2+10=12</text>
+            <text class="tree-lbl leaf" x="325" y="214">Grün → 10+0=10</text>
+            <text class="tree-lbl leaf hl" x="325" y="254">Blau → 10+2=12</text>
+            <text class="tree-lbl leaf" x="325" y="294">Rot → 10+10=20</text>
+          </svg>
+        </div>
+        <p><strong>Pfadmultiplikationsregel</strong> (Produkt der Wahrscheinlichkeiten entlang eines Pfades):
+        \[P(\text{Blau, Rot})=\frac38\cdot\frac18=\frac3{64},\qquad P(\text{Rot, Blau})=\frac18\cdot\frac38=\frac3{64}\]</p>
+        <p><strong>Pfadsummenregel</strong> (Summe über alle zum Ereignis gehörenden Pfade):
+        \[P(\text{Gesamtgewinn}=12)=\frac3{64}+\frac3{64}=\frac6{64}=\frac3{32}\approx 0{,}094\]</p>
+        <div class="result">P(Gesamtgewinn = 12 €) = 3/32 ≈ 9,4 %</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">c</span><span class="tag">§02 Erwartungswert</span></div>
+    <p class="aufgabenstellung">Berechnen Sie den Erwartungswert E(X) für ein einzelnes Spiel und interpretieren Sie das Ergebnis im Sachzusammenhang.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Der Erwartungswert ist die mit den Wahrscheinlichkeiten gewichtete Summe aller möglichen Werte:
+        \[E(X)=\sum_i x_i\cdot P(X=x_i)=0\cdot\frac12+2\cdot\frac38+10\cdot\frac18=0+0{,}75+1{,}25=2\]</p>
+        <div class="result">E(X) = 2 €</div>
+        <p>Im Sachzusammenhang bedeutet das: Spielt man das Spiel sehr oft, gewinnt man im Durchschnitt 2&nbsp;€ pro Spiel — auch wenn bei jedem einzelnen Spiel nur 0&nbsp;€, 2&nbsp;€ oder 10&nbsp;€ tatsächlich ausgezahlt werden.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">d</span><span class="tag">§08 Glücksspiel anpassen</span></div>
+    <p class="aufgabenstellung">Für jedes Spiel zahlt man einen Einsatz von 1&nbsp;€. Ist das Spiel für den Spieler vorteilhaft, nachteilig oder fair? Auf welchen Betrag müsste der Betreiber den Einsatz festsetzen, damit das Spiel fair ist?</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Der Nettogewinn pro Spiel ist \(X-1\) (Auszahlung minus Einsatz). Sein Erwartungswert:
+        \[E(X-1)=E(X)-1=2-1=1>0\]</p>
+        <p>Da der erwartete Nettogewinn positiv ist, ist das Spiel bei einem Einsatz von 1&nbsp;€ <strong>vorteilhaft für den Spieler</strong> (und entsprechend nachteilig für den Betreiber).</p>
+        <p>Ein Spiel heißt fair, wenn der erwartete Nettogewinn genau 0 ist. Gesucht ist also der Einsatz e mit:
+        \[E(X)-e=0 \ \Longrightarrow\ e=E(X)=2\]</p>
+        <div class="result">Fairer Einsatz: e = 2 € (bei 1 € ist das Spiel zugunsten des Spielers)</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">e</span><span class="tag">§04 Kumulierte Wahrscheinlichkeit</span></div>
+    <p class="aufgabenstellung">Sei S der Gesamtgewinn aus zwei Spielen. Stellen Sie die Wahrscheinlichkeitsverteilung von S auf und berechnen Sie \(P(S\leq 4)\).</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>S kann die Werte 0, 2, 4, 10, 12, 20 annehmen (siehe Baumdiagramm aus Teilaufgabe b, hier vollständig ausgewertet):</p>
+        <table class="vft">
+          <tr><th>S</th><td>0</td><td>2</td><td>4</td><td>10</td><td>12</td><td>20</td></tr>
+          <tr><th>P(S=s)</th><td>16/64</td><td>24/64</td><td>9/64</td><td>8/64</td><td>6/64</td><td>1/64</td></tr>
+        </table>
+        <p>Probe: \(16+24+9+8+6+1=64\), also Summe \(=64/64=1\) ✓. Die kumulierte Wahrscheinlichkeit \(P(S\leq4)\) fasst alle Werte bis einschließlich 4 zusammen:
+        \[P(S\leq4)=P(S=0)+P(S=2)+P(S=4)=\frac{16}{64}+\frac{24}{64}+\frac9{64}=\frac{49}{64}\approx0{,}766\]</p>
+        <div class="result">P(S ≤ 4) = 49/64 ≈ 76,6 %</div>
+        <p class="note">Kumulierte Wahrscheinlichkeiten wie \(P(S\leq4)\) beantworten immer die Frage „höchstens" — sie summieren alle Einzelwahrscheinlichkeiten bis zu einer Obergrenze auf, statt nur einen einzelnen Wert zu betrachten.</p>
+      </div>
+    </details>
+  </div>
+  <a class="backlink" href="#top">↑ Zur Übersicht</a>
+</section>
+
+<!-- ========================= AUFGABE 2 ========================= -->
+<section class="aufgabe" id="a2">
+  <div class="aufgabe-head">
+    <span class="eyebrow">Aufgabe 02</span>
+    <h2>Bernoulli-Ketten</h2>
+  </div>
+  <p class="context">Ein Basketballspieler trifft bei einem Freiwurf erfahrungsgemäß mit Wahrscheinlichkeit \(p=0{,}7\). Er wirft <span class="pt">n=10</span> Freiwürfe, die als voneinander unabhängig angenommen werden. X sei die Anzahl der Treffer.</p>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">a</span><span class="tag">§05 Formel von Bernoulli</span></div>
+    <p class="aufgabenstellung">Berechnen Sie mithilfe der Formel von Bernoulli die Wahrscheinlichkeit, dass der Spieler von 10 Würfen genau 7 trifft.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Die Bernoulli-Formel für eine Bernoulli-Kette der Länge n mit Trefferwahrscheinlichkeit p:
+        \[P(X=k)=\binom{n}{k}\,p^k\,(1-p)^{n-k}\]</p>
+        <p>Eingesetzt mit \(n=10\), \(p=0{,}7\), \(k=7\):
+        \[P(X=7)=\binom{10}{7}\cdot0{,}7^7\cdot0{,}3^3=120\cdot0{,}0823543\cdot0{,}027\approx0{,}2668\]</p>
+        <div class="result">P(X = 7) ≈ 0,2668 ≈ 26,7 %</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">b</span><span class="tag">§17 Parameter ermitteln</span></div>
+    <p class="aufgabenstellung">Ein Losstand bietet Lose mit einer Gewinnwahrscheinlichkeit von 15&nbsp;% pro Los an. Ein Kunde kauft 20 Lose. Bestimmen Sie zunächst die Parameter n, p und k für das Ereignis „mindestens 3 Gewinne" und berechnen Sie anschließend diese Wahrscheinlichkeit.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p><strong>Parameter aus dem Text ablesen:</strong> „20 Lose" liefert \(n=20\), „Gewinnwahrscheinlichkeit 15&nbsp;%" liefert \(p=0{,}15\). Das Wort „mindestens" bei „mindestens 3 Gewinne" bedeutet \(k\geq3\), gesucht ist also \(P(X\geq3)\) mit \(X\sim B(20;0{,}15)\).</p>
+        <p>Direkt wäre eine Summe aus 18 Summanden nötig (\(k=3\) bis \(k=20\)) — einfacher ist der Weg über das Gegenereignis „höchstens 2 Gewinne":
+        \[P(X\geq3)=1-P(X\leq2)=1-\big[P(X=0)+P(X=1)+P(X=2)\big]\]</p>
+        <p>Mit der Bernoulli-Formel: \(P(X=0)=0{,}85^{20}\approx0{,}0388\); \(P(X=1)=\binom{20}{1}\cdot0{,}15\cdot0{,}85^{19}\approx0{,}1368\); \(P(X=2)=\binom{20}{2}\cdot0{,}15^2\cdot0{,}85^{18}\approx0{,}2293\). Summe \(\approx0{,}4049\).</p>
+        \[P(X\geq3)=1-0{,}4049=0{,}5951\]
+        <div class="result">n = 20, p = 0,15, k ≥ 3  →  P(X ≥ 3) ≈ 59,5 %</div>
+        <p class="note">Typische Signalwörter: „mindestens k" → \(X\geq k\); „höchstens k" → \(X\leq k\); „genau k" → \(X=k\); „weniger als k" → \(X\leq k-1\); „mehr als k" → \(X\geq k+1\).</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">c</span><span class="tag">§04 Kumulierte Wahrscheinlichkeit</span></div>
+    <p class="aufgabenstellung">Berechnen Sie für den Basketballspieler (n=10, p=0,7) die Wahrscheinlichkeit, dass er <strong>höchstens 6</strong> von 10 Würfen trifft. Nutzen Sie das Ergebnis, um \(P(X\geq7)\) zu bestimmen, und vergleichen Sie mit Teilaufgabe a.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Die kumulierte Wahrscheinlichkeit \(P(X\leq6)\) summiert alle Einzelwahrscheinlichkeiten von \(k=0\) bis \(k=6\) auf:
+        \[P(X\leq6)=\sum_{k=0}^{6}\binom{10}{k}\,0{,}7^k\,0{,}3^{10-k}\approx0{,}3504\]</p>
+        <p>Über das Gegenereignis folgt sofort:
+        \[P(X\geq7)=1-P(X\leq6)=1-0{,}3504=0{,}6496\]</p>
+        <div class="result">P(X ≤ 6) ≈ 0,3504  →  P(X ≥ 7) ≈ 0,6496</div>
+        <p class="note">Zur Kontrolle: \(P(X\geq7)=P(X=7)+P(X=8)+P(X=9)+P(X=10)\approx0{,}2668+0{,}2335+0{,}1211+0{,}0282=0{,}6496\) — der Wert aus Teilaufgabe a (P(X=7)≈0,2668) ist also nur einer von vier Summanden in \(P(X\geq7)\).</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">d</span><span class="tag">§09 Histogramm interpretieren</span></div>
+    <p class="aufgabenstellung">Das folgende Histogramm zeigt die Wahrscheinlichkeitsverteilung von X. Lesen Sie ab, für welchen Trefferwert k die Wahrscheinlichkeit am größten ist, und schätzen Sie \(P(6\leq X\leq8)\) anhand der markierten Balken.</p>
+    <div class="barchart hist" role="img" aria-label="Histogramm der Binomialverteilung B(10;0,7)">
+      <div class="bar-col"><div class="bar-val">0,0%</div><div class="bar" style="height:2px"></div><div class="bar-lbl">0</div></div>
+      <div class="bar-col"><div class="bar-val">0,0%</div><div class="bar" style="height:2px"></div><div class="bar-lbl">1</div></div>
+      <div class="bar-col"><div class="bar-val">0,1%</div><div class="bar" style="height:2px"></div><div class="bar-lbl">2</div></div>
+      <div class="bar-col"><div class="bar-val">0,9%</div><div class="bar" style="height:5px"></div><div class="bar-lbl">3</div></div>
+      <div class="bar-col"><div class="bar-val">3,7%</div><div class="bar" style="height:21px"></div><div class="bar-lbl">4</div></div>
+      <div class="bar-col"><div class="bar-val">10,3%</div><div class="bar" style="height:58px"></div><div class="bar-lbl">5</div></div>
+      <div class="bar-col"><div class="bar-val">20,0%</div><div class="bar hl" style="height:112px"></div><div class="bar-lbl">6</div></div>
+      <div class="bar-col"><div class="bar-val">26,7%</div><div class="bar hl" style="height:150px"></div><div class="bar-lbl">7</div></div>
+      <div class="bar-col"><div class="bar-val">23,3%</div><div class="bar hl" style="height:131px"></div><div class="bar-lbl">8</div></div>
+      <div class="bar-col"><div class="bar-val">12,1%</div><div class="bar" style="height:68px"></div><div class="bar-lbl">9</div></div>
+      <div class="bar-col"><div class="bar-val">2,8%</div><div class="bar" style="height:16px"></div><div class="bar-lbl">10</div></div>
+    </div>
+    <p class="chart-caption">k = Anzahl Treffer von 10 Würfen · grün markiert: k = 6, 7, 8</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Der höchste Balken liegt bei \(k=7\) mit \(P(X=7)\approx26{,}7\%\) — das ist der wahrscheinlichste Trefferwert (Modus). Das ist plausibel, da \(E(X)=np=10\cdot0{,}7=7\) und der Modus einer Binomialverteilung meist bei \(\lfloor(n+1)p\rfloor\) liegt.</p>
+        <p>Für die Schätzung von \(P(6\leq X\leq8)\) addiert man die drei markierten Balken:
+        \[P(6\leq X\leq8)\approx0{,}2001+0{,}2668+0{,}2335=0{,}7004\]</p>
+        <div class="result">Modus bei k = 7 · P(6 ≤ X ≤ 8) ≈ 70,0 %</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">e</span><span class="tag">§10 µ und σ</span></div>
+    <p class="aufgabenstellung">Berechnen Sie Erwartungswert µ und Standardabweichung σ von X.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Für eine binomialverteilte Zufallsgröße gilt:
+        \[\mu=E(X)=n\cdot p=10\cdot0{,}7=7\]
+        \[\sigma=\sqrt{n\cdot p\cdot(1-p)}=\sqrt{10\cdot0{,}7\cdot0{,}3}=\sqrt{2{,}1}\approx1{,}449\]</p>
+        <div class="result">µ = 7 Treffer · σ ≈ 1,449 Treffer</div>
+        <p>Das passt zum Histogramm aus Teilaufgabe d: Der höchste Balken liegt genau bei \(k=\mu=7\), und die Balken links und rechts davon nehmen mit wachsendem Abstand zu µ erkennbar ab — typisch für eine annähernd glockenförmige Verteilung.</p>
+      </div>
+    </details>
+  </div>
+  <a class="backlink" href="#top">↑ Zur Übersicht</a>
+</section>
+
+<!-- ========================= AUFGABE 3 ========================= -->
+<section class="aufgabe" id="a3">
+  <div class="aufgabe-head">
+    <span class="eyebrow">Aufgabe 03</span>
+    <h2>Erwartungswert, Streuung und die Glockenform</h2>
+  </div>
+  <p class="context">Ein Meinungsforschungsinstitut befragt <span class="pt">n=100</span> zufällig ausgewählte Personen. In der Grundgesamtheit besitzen 40&nbsp;% der Personen die Eigenschaft E. X sei die Anzahl der befragten Personen mit Eigenschaft E, \(X\sim B(100;0{,}4)\).</p>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">a</span><span class="tag">§10 µ und σ</span></div>
+    <p class="aufgabenstellung">Berechnen Sie µ und σ von X und markieren Sie µ in einer Skizze der Verteilung.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>\[\mu=n\cdot p=100\cdot0{,}4=40,\qquad \sigma=\sqrt{n\cdot p\cdot(1-p)}=\sqrt{100\cdot0{,}4\cdot0{,}6}=\sqrt{24}\approx4{,}899\]</p>
+        <div class="result">µ = 40 · σ ≈ 4,899</div>
+        <div class="bell-wrap">
+          <svg viewBox="0 0 640 220" role="img" aria-label="Glockenkurve der Binomialverteilung B(100;0,4) mit markiertem µ und Sigma-Bereichen">
+            <line class="bell-axis" x1="20" y1="190" x2="620" y2="190"/>
+            <line class="bell-grid" x1="110" y1="30" x2="110" y2="190"/>
+            <line class="bell-grid" x1="180" y1="30" x2="180" y2="190"/>
+            <line class="bell-grid strong" x1="250" y1="30" x2="250" y2="190"/>
+            <line class="bell-grid strong" x1="320" y1="20" x2="320" y2="190"/>
+            <line class="bell-grid strong" x1="390" y1="30" x2="390" y2="190"/>
+            <line class="bell-grid" x1="460" y1="30" x2="460" y2="190"/>
+            <line class="bell-grid" x1="530" y1="30" x2="530" y2="190"/>
+            <polyline class="bell-curve" points="40.0,190.0 49.3,189.9 58.7,189.9 68.0,189.8 77.3,189.7 86.7,189.5 96.0,189.2 105.3,188.7 114.7,188.1 124.0,187.2 133.3,186.0 142.7,184.3 152.0,182.1 161.3,179.3 170.7,175.6 180.0,171.1 189.3,165.5 198.7,158.8 208.0,151.1 217.3,142.2 226.7,132.4 236.0,121.9 245.3,110.7 254.7,99.4 264.0,88.3 273.3,77.9 282.7,68.6 292.0,60.8 301.3,54.9 310.7,51.2 320.0,50.0 329.3,51.2 338.7,54.9 348.0,60.8 357.3,68.6 366.7,77.9 376.0,88.3 385.3,99.4 394.7,110.7 404.0,121.9 413.3,132.4 422.7,142.2 432.0,151.1 441.3,158.8 450.7,165.5 460.0,171.1 469.3,175.6 478.7,179.3 488.0,182.1 497.3,184.3 506.7,186.0 516.0,187.2 525.3,188.1 534.7,188.7 544.0,189.2 553.3,189.5 562.7,189.7 572.0,189.8 581.3,189.9 590.7,189.9 600.0,190.0"/>
+            <circle class="bell-dot alt" cx="250" cy="182.1" r="3.5"/>
+            <circle class="bell-dot alt" cx="390" cy="110.7" r="3.5"/>
+            <circle class="bell-dot" cx="320" cy="50" r="3.5"/>
+            <text class="tree-lbl leaf" x="95" y="205">25,3</text>
+            <text class="tree-lbl leaf" x="165" y="205">30,2</text>
+            <text class="tree-lbl leaf strong" x="235" y="205">35,1</text>
+            <text class="bell-lbl strong" x="308" y="205">µ=40</text>
+            <text class="tree-lbl leaf strong" x="378" y="205">44,9</text>
+            <text class="tree-lbl leaf" x="448" y="205">49,8</text>
+            <text class="tree-lbl leaf" x="518" y="205">54,7</text>
+            <text class="bell-lbl" x="330" y="35">Hochpunkt</text>
+          </svg>
+        </div>
+        <p class="chart-caption">Die durchgezogene Linie zeigt den glockenförmigen Verlauf, den das Histogramm von B(100;0,4) für wachsendes n annähernd annimmt.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">b</span><span class="tag">§15 Eigenschaften der Glockenfunktion</span></div>
+    <p class="aufgabenstellung">Nennen Sie drei charakteristische Eigenschaften der Glockenkurve aus Teilaufgabe a und bestimmen Sie die Lage ihrer Wendepunkte.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Charakteristische Eigenschaften der Glockenkurve (vgl. Diagramm in Teilaufgabe a):</p>
+        <p>1) Sie ist <strong>achsensymmetrisch</strong> zur Geraden \(x=\mu\). 2) Sie besitzt genau einen <strong>Hochpunkt</strong> bei \(x=\mu\) — dort ist die Wahrscheinlichkeitsdichte am größten. 3) Sie besitzt genau zwei <strong>Wendepunkte</strong>, symmetrisch links und rechts von µ, an denen die Kurve von einer Rechts- in eine Linkskrümmung wechselt (und umgekehrt). 4) Für \(x\to\pm\infty\) nähert sie sich der x-Achse an, ohne sie zu erreichen.</p>
+        <p>Die Wendepunkte einer Glockenkurve liegen exakt bei \(x=\mu-\sigma\) und \(x=\mu+\sigma\) (im Diagramm oben farbig markiert):
+        \[\mu-\sigma\approx40-4{,}899=35{,}1,\qquad \mu+\sigma\approx40+4{,}899=44{,}9\]</p>
+        <div class="result">Wendepunkte bei x ≈ 35,1 und x ≈ 44,9</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">c</span><span class="tag">§16 Sigma-Regel & Symmetrie</span></div>
+    <p class="aufgabenstellung">Formulieren Sie die Sigma-Regel und wenden Sie sie an, um die Intervalle zu bestimmen, in denen X mit ca. 68&nbsp;%, 95&nbsp;% bzw. 99,7&nbsp;% Wahrscheinlichkeit liegt.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Die Sigma-Regel nutzt die Symmetrie der Glockenkurve um µ und liefert für annähernd glockenförmig verteilte Zufallsgrößen die folgenden Faustregeln:
+        \[P(\mu-\sigma\leq X\leq\mu+\sigma)\approx68{,}3\%\]
+        \[P(\mu-2\sigma\leq X\leq\mu+2\sigma)\approx95{,}4\%\]
+        \[P(\mu-3\sigma\leq X\leq\mu+3\sigma)\approx99{,}7\%\]</p>
+        <p>Mit \(\mu=40\) und \(\sigma\approx4{,}899\) (auf ganze Zahlen gerundet, da X nur ganzzahlige Werte annimmt):</p>
+        <table class="vft">
+          <tr><th>Bereich</th><th>Intervall</th><th>Wahrscheinlichkeit</th></tr>
+          <tr><td>µ ± σ</td><td>[35 ; 45]</td><td>≈ 68,3 %</td></tr>
+          <tr><td>µ ± 2σ</td><td>[30 ; 50]</td><td>≈ 95,4 %</td></tr>
+          <tr><td>µ ± 3σ</td><td>[25 ; 55]</td><td>≈ 99,7 %</td></tr>
+        </table>
+        <div class="result">P(35 ≤ X ≤ 45) ≈ 68,3 % · P(30 ≤ X ≤ 50) ≈ 95,4 % · P(25 ≤ X ≤ 55) ≈ 99,7 %</div>
+        <p class="note">Wegen der Symmetrie der Glockenkurve um µ liegt außerhalb jedes Intervalls jeweils die gleiche Restwahrscheinlichkeit links und rechts, z. B. je ca. 15,85 % außerhalb von [35;45] auf jeder Seite.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">d</span><span class="tag">§11 Änderungen im Histogramm</span></div>
+    <p class="aufgabenstellung">Beschreiben Sie, wie sich das Histogramm einer Binomialverteilung verändert, wenn (1) bei gleichem n die Erfolgswahrscheinlichkeit p durch \(1-p\) ersetzt wird, und (2) bei gleichem p die Anzahl n vergrößert wird.</p>
+    <div class="bell-wrap">
+      <svg viewBox="0 0 640 200" role="img" aria-label="Vergleich der Verteilungen B(100;0,3) und B(100;0,7)">
+        <line class="bell-axis" x1="20" y1="180" x2="620" y2="180"/>
+        <line class="bell-grid strong" x1="180" y1="40" x2="180" y2="180"/>
+        <line class="bell-grid strong" x1="460" y1="40" x2="460" y2="180"/>
+        <line class="bell-grid" x1="320" y1="20" x2="320" y2="180"/>
+        <polyline class="bell-curve" points="40.0,180.0 49.3,180.0 58.7,179.9 68.0,179.7 77.3,179.3 86.7,178.3 96.0,176.1 105.3,172.0 114.7,164.9 124.0,153.9 133.3,138.3 142.7,119.0 152.0,98.0 161.3,78.7 170.7,65.0 180.0,60.0 189.3,65.0 198.7,78.7 208.0,98.0 217.3,119.0 226.7,138.3 236.0,153.9 245.3,164.9 254.7,172.0 264.0,176.1 273.3,178.3 282.7,179.3 292.0,179.7 301.3,179.9 310.7,180.0 320.0,180.0 329.3,180.0 338.7,180.0 348.0,180.0 357.3,180.0 366.7,180.0 376.0,180.0 385.3,180.0 394.7,180.0 404.0,180.0 413.3,180.0 422.7,180.0 432.0,180.0 441.3,180.0 450.7,180.0 460.0,180.0 469.3,180.0 478.7,180.0 488.0,180.0 497.3,180.0 506.7,180.0 516.0,180.0 525.3,180.0 534.7,180.0 544.0,180.0 553.3,180.0 562.7,180.0 572.0,180.0 581.3,180.0 590.7,180.0 600.0,180.0"/>
+        <polyline class="bell-curve alt" points="40.0,180.0 49.3,180.0 58.7,180.0 68.0,180.0 77.3,180.0 86.7,180.0 96.0,180.0 105.3,180.0 114.7,180.0 124.0,180.0 133.3,180.0 142.7,180.0 152.0,180.0 161.3,180.0 170.7,180.0 180.0,180.0 189.3,180.0 198.7,180.0 208.0,180.0 217.3,180.0 226.7,180.0 236.0,180.0 245.3,180.0 254.7,180.0 264.0,180.0 273.3,180.0 282.7,180.0 292.0,180.0 301.3,180.0 310.7,180.0 320.0,180.0 329.3,180.0 338.7,179.9 348.0,179.7 357.3,179.3 366.7,178.3 376.0,176.1 385.3,172.0 394.7,164.9 404.0,153.9 413.3,138.3 422.7,119.0 432.0,98.0 441.3,78.7 450.7,65.0 460.0,60.0 469.3,65.0 478.7,78.7 488.0,98.0 497.3,119.0 506.7,138.3 516.0,153.9 525.3,164.9 534.7,172.0 544.0,176.1 553.3,178.3 562.7,179.3 572.0,179.7 581.3,179.9 590.7,180.0 600.0,180.0"/>
+        <text class="bell-lbl strong" x="160" y="196">µ=30 (p=0,3)</text>
+        <text class="bell-lbl strong" x="435" y="196" style="fill:var(--amber)">µ=70 (p=0,7)</text>
+        <text class="bell-lbl" x="300" y="15">Spiegelachse n/2=50</text>
+      </svg>
+    </div>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p><strong>(1) p durch 1−p ersetzen (gleiches n):</strong> Für \(n=100\) ergibt \(p=0{,}3\) den Erwartungswert \(\mu=30\), und \(p=0{,}7\) ergibt \(\mu=70\) — bei gleicher Standardabweichung \(\sigma=\sqrt{100\cdot0{,}3\cdot0{,}7}=\sqrt{100\cdot0{,}7\cdot0{,}3}\approx4{,}583\) in beiden Fällen. Das Histogramm von \(B(100;0{,}7)\) ist also genau das an der Stelle \(x=n/2=50\) gespiegelte Histogramm von \(B(100;0{,}3)\) — gleiche Form, gleiche Breite, nur der Ort des Hochpunkts wechselt die Seite.</p>
+        <p><strong>(2) n vergrößern (gleiches p):</strong> Für \(p=0{,}3\) gilt bei \(n=50\): \(\mu=15\), \(\sigma=\sqrt{50\cdot0{,}3\cdot0{,}7}\approx3{,}240\); bei \(n=200\): \(\mu=60\), \(\sigma=\sqrt{200\cdot0{,}3\cdot0{,}7}\approx6{,}481\). In absoluten Zahlen wird die Kurve also breiter (σ wächst mit \(\sqrt n\)) und der Hochpunkt niedriger, da sich die Gesamtwahrscheinlichkeit 1 auf mehr mögliche Werte verteilt.</p>
+        <div class="bell-wrap">
+          <svg viewBox="0 0 640 200" role="img" aria-label="Vergleich der Verteilungen B(50;0,3) und B(200;0,3)">
+            <line class="bell-axis" x1="20" y1="190" x2="620" y2="190"/>
+            <line class="bell-grid strong" x1="133" y1="40" x2="133" y2="190"/>
+            <line class="bell-grid strong" x1="413" y1="40" x2="413" y2="190"/>
+            <polyline class="bell-curve" points="40.0,190.0 48.0,190.0 56.0,189.9 64.0,189.6 72.0,188.7 80.0,186.1 88.0,179.6 96.0,166.6 104.0,144.9 112.0,115.7 120.0,85.5 128.0,64.5 136.0,61.1 144.0,77.0 152.0,105.3 160.0,135.8 168.0,160.4 176.0,176.1 184.0,184.5 192.0,188.1 200.0,189.5 208.0,189.9 216.0,190.0 224.0,190.0 232.0,190.0 240.0,190.0 248.0,190.0 256.0,190.0 264.0,190.0 272.0,190.0 280.0,190.0 288.0,190.0 296.0,190.0 304.0,190.0 312.0,190.0 320.0,190.0 328.0,190.0 336.0,190.0 344.0,190.0 352.0,190.0 360.0,190.0 368.0,190.0 376.0,190.0 384.0,190.0 392.0,190.0 400.0,190.0 408.0,190.0 416.0,190.0 424.0,190.0 432.0,190.0 440.0,190.0 448.0,190.0 456.0,190.0 464.0,190.0 472.0,190.0 480.0,190.0 488.0,190.0 496.0,190.0 504.0,190.0 512.0,190.0 520.0,190.0 528.0,190.0 536.0,190.0 544.0,190.0 552.0,190.0 560.0,190.0 568.0,190.0 576.0,190.0 584.0,190.0 592.0,190.0 600.0,190.0"/>
+            <polyline class="bell-curve alt" points="40.0,190.0 48.0,190.0 56.0,190.0 64.0,190.0 72.0,190.0 80.0,190.0 88.0,190.0 96.0,190.0 104.0,190.0 112.0,190.0 120.0,190.0 128.0,190.0 136.0,190.0 144.0,190.0 152.0,190.0 160.0,190.0 168.0,190.0 176.0,190.0 184.0,190.0 192.0,190.0 200.0,190.0 208.0,190.0 216.0,190.0 224.0,190.0 232.0,190.0 240.0,190.0 248.0,190.0 256.0,190.0 264.0,189.9 272.0,189.9 280.0,189.7 288.0,189.5 296.0,189.1 304.0,188.4 312.0,187.2 320.0,185.5 328.0,183.1 336.0,179.7 344.0,175.2 352.0,169.6 360.0,162.9 368.0,155.4 376.0,147.7 384.0,140.1 392.0,133.5 400.0,128.5 408.0,125.6 416.0,125.1 424.0,127.2 432.0,131.6 440.0,137.8 448.0,145.1 456.0,152.9 464.0,160.5 472.0,167.4 480.0,173.4 488.0,178.3 496.0,182.1 504.0,184.8 512.0,186.7 520.0,188.0 528.0,188.9 536.0,189.4 544.0,189.7 552.0,189.8 560.0,189.9 568.0,190.0 576.0,190.0 584.0,190.0 592.0,190.0 600.0,190.0"/>
+            <text class="bell-lbl strong" x="90" y="205">µ=15 (n=50)</text>
+            <text class="bell-lbl strong" x="365" y="205" style="fill:var(--amber)">µ=60 (n=200)</text>
+          </svg>
+        </div>
+        <p>Entscheidend ist aber das <strong>relative</strong> Verhalten: Das Verhältnis \(\sigma/n\) sinkt mit wachsendem n (\(3{,}24/50\approx6{,}5\%\) gegenüber \(6{,}48/200\approx3{,}2\%\)), da σ nur mit \(\sqrt n\) wächst, n selbst aber linear. Bezogen auf den möglichen Wertebereich wird die Kurve mit wachsendem n also relativ schmaler und konzentriert sich enger um den (weiter nach rechts verschobenen) Erwartungswert.</p>
+        <div class="result">p ↔ 1−p: Spiegelung an n/2, gleiche Form. n ↑: µ und σ wachsen absolut, σ/n sinkt → relativ schmalere Kurve.</div>
+      </div>
+    </details>
+  </div>
+  <a class="backlink" href="#top">↑ Zur Übersicht</a>
+</section>
+
+<!-- ========================= AUFGABE 4 ========================= -->
+<section class="aufgabe" id="a4">
+  <div class="aufgabe-head">
+    <span class="eyebrow">Aufgabe 04</span>
+    <h2>Ein Test auf eine Krankheit</h2>
+  </div>
+  <p class="context">Ein medizinischer Test auf eine Krankheit K wird an 1000 zufällig ausgewählten Personen durchgeführt. In dieser Gruppe sind 50 Personen tatsächlich krank. Aus Studien ist bekannt: Die <strong>Sensitivität</strong> des Tests (Anteil der unter den Kranken positiv Getesteten) beträgt 94&nbsp;%, die <strong>Spezifität</strong> (Anteil der unter den Gesunden negativ Getesteten) beträgt 96&nbsp;%. T steht für „Test positiv", \(\overline T\) für „Test negativ".</p>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">a</span><span class="tag">§06 Vierfeldertafel ausfüllen</span></div>
+    <p class="aufgabenstellung">Füllen Sie die folgende Vierfeldertafel vollständig aus.</p>
+    <table class="vft">
+      <tr><th></th><th>T</th><th>\(\overline T\)</th><th>Σ</th></tr>
+      <tr><td class="rowhead">K</td><td class="blank">?</td><td class="blank">?</td><td>50</td></tr>
+      <tr><td class="rowhead">\(\overline K\)</td><td class="blank">?</td><td class="blank">?</td><td class="blank">?</td></tr>
+      <tr><td class="rowhead">Σ</td><td class="blank">?</td><td class="blank">?</td><td>1000</td></tr>
+    </table>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Von den 50 Kranken sind 94&nbsp;% positiv: \(50\cdot0{,}94=47\), also 3 negativ. Von den \(1000-50=950\) Gesunden sind 96&nbsp;% negativ: \(950\cdot0{,}96=912\), also \(950-912=38\) fälschlich positiv (falsch positiv).</p>
+        <table class="vft">
+          <tr><th></th><th>T</th><th>\(\overline T\)</th><th>Σ</th></tr>
+          <tr><td class="rowhead">K</td><td class="filled">47</td><td class="filled">3</td><td class="sum">50</td></tr>
+          <tr><td class="rowhead">\(\overline K\)</td><td class="filled">38</td><td class="filled">912</td><td class="sum">950</td></tr>
+          <tr><td class="rowhead">Σ</td><td class="sum">85</td><td class="sum">915</td><td class="sum">1000</td></tr>
+        </table>
+        <div class="result">85 von 1000 Personen werden insgesamt positiv getestet, davon 47 zurecht und 38 fälschlich.</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">b</span><span class="tag">§07 Wahrscheinlichkeiten berechnen</span></div>
+    <p class="aufgabenstellung">Bestimmen Sie aus der Vierfeldertafel: \(P(T)\), \(P(K\cap T)\) und \(P(\overline K\cap\overline T)\).</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Die absoluten Häufigkeiten werden einfach durch die Gesamtzahl 1000 geteilt:
+        \[P(T)=\frac{85}{1000}=0{,}085,\qquad P(K\cap T)=\frac{47}{1000}=0{,}047,\qquad P(\overline K\cap\overline T)=\frac{912}{1000}=0{,}912\]</p>
+        <div class="result">P(T) = 8,5 % · P(K∩T) = 4,7 % · P(K̄∩T̄) = 91,2 %</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">c</span><span class="tag">§12 Bedingte Wahrscheinlichkeit</span></div>
+    <p class="aufgabenstellung">Eine Person wird positiv getestet. Berechnen Sie die Wahrscheinlichkeit, dass sie tatsächlich krank ist, und kommentieren Sie das Ergebnis.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Gesucht ist die bedingte Wahrscheinlichkeit \(P(K\mid T)\), berechnet mit der Definition der bedingten Wahrscheinlichkeit:
+        \[P(K\mid T)=\frac{P(K\cap T)}{P(T)}=\frac{47/1000}{85/1000}=\frac{47}{85}\approx0{,}553\]</p>
+        <div class="result">P(K | T) ≈ 55,3 %</div>
+        <p class="note">Obwohl der Test zu 94&nbsp;% korrekt anschlägt, ist nur gut jede zweite positiv getestete Person tatsächlich krank — weil die Krankheit selbst sehr selten ist (nur 5&nbsp;% der Bevölkerung), fallen die wenigen falsch-positiven Ergebnisse aus der großen Gruppe der Gesunden stark ins Gewicht. Das ist ein klassisches Beispiel dafür, dass \(P(K\mid T)\) und \(P(T\mid K)\) (die Sensitivität, 94&nbsp;%) zwei völlig verschiedene Größen sind.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">d</span><span class="tag">§13 Stochastische Unabhängigkeit</span></div>
+    <p class="aufgabenstellung">Prüfen Sie rechnerisch, ob die Ereignisse K und T stochastisch unabhängig sind.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Zwei Ereignisse A und B sind genau dann stochastisch unabhängig, wenn \(P(A\cap B)=P(A)\cdot P(B)\) gilt. Hier:
+        \[P(K)\cdot P(T)=0{,}05\cdot0{,}085=0{,}00425\]
+        \[P(K\cap T)=0{,}047\]</p>
+        <p>Da \(0{,}00425\neq0{,}047\), sind K und T <strong>nicht</strong> stochastisch unabhängig.</p>
+        <div class="result">P(K)·P(T) = 0,00425 ≠ P(K∩T) = 0,047 ⇒ abhängig</div>
+        <p class="note">Das ist inhaltlich genau das, was man erwartet: Wäre das Testergebnis unabhängig vom tatsächlichen Krankheitsstatus, wäre der Test völlig nutzlos. Die (starke) Abhängigkeit ist gerade der Grund, warum ein positiver Test die Wahrscheinlichkeit „krank" von 5&nbsp;% (vorher) auf 55,3&nbsp;% (nachher, siehe Teilaufgabe c) anhebt.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="teil">
+    <div class="teil-head"><span class="teil-letter">e</span><span class="tag">§14 Baumdiagramm ↔ Vierfeldertafel</span></div>
+    <p class="aufgabenstellung">Stellen Sie dieselbe Situation als Baumdiagramm dar und zeigen Sie, dass die Pfadwahrscheinlichkeiten mit den Werten der Vierfeldertafel übereinstimmen.</p>
+    <details class="solution">
+      <summary><span class="show">Lösung anzeigen</span><span class="hide">Lösung ausblenden</span></summary>
+      <div class="sol-body">
+        <p>Erste Stufe: krank oder gesund, mit \(P(K)=0{,}05\) und \(P(\overline K)=0{,}95\). Zweite Stufe: Testergebnis, bedingt durch Sensitivität bzw. Spezifität.</p>
+        <div class="tree-wrap">
+          <svg viewBox="0 0 460 240" role="img" aria-label="Baumdiagramm: Krankheit und Testergebnis">
+            <path class="tree-edge" d="M40,120 L180,50"/>
+            <path class="tree-edge" d="M40,120 L180,190"/>
+            <path class="tree-edge" d="M180,50 L340,20"/>
+            <path class="tree-edge" d="M180,50 L340,80"/>
+            <path class="tree-edge" d="M180,190 L340,160"/>
+            <path class="tree-edge" d="M180,190 L340,220"/>
+            <circle class="tree-node" cx="40" cy="120" r="3.5"/>
+            <circle class="tree-node" cx="180" cy="50" r="3.5"/>
+            <circle class="tree-node" cx="180" cy="190" r="3.5"/>
+            <circle class="tree-node" cx="340" cy="20" r="3"/>
+            <circle class="tree-node" cx="340" cy="80" r="3"/>
+            <circle class="tree-node" cx="340" cy="160" r="3"/>
+            <circle class="tree-node" cx="340" cy="220" r="3"/>
+            <text class="tree-lbl p" x="90" y="75">0,05</text>
+            <text class="tree-lbl p" x="90" y="165">0,95</text>
+            <text class="tree-lbl" x="182" y="45">K</text>
+            <text class="tree-lbl" x="182" y="205">K̄</text>
+            <text class="tree-lbl p" x="250" y="28">0,94</text>
+            <text class="tree-lbl p" x="250" y="70">0,06</text>
+            <text class="tree-lbl p" x="250" y="150">0,04</text>
+            <text class="tree-lbl p" x="250" y="212">0,96</text>
+            <text class="tree-lbl leaf" x="344" y="15">T → 0,05·0,94=0,047</text>
+            <text class="tree-lbl leaf" x="344" y="80">T̄ → 0,05·0,06=0,003</text>
+            <text class="tree-lbl leaf" x="344" y="158">T → 0,95·0,04=0,038</text>
+            <text class="tree-lbl leaf" x="344" y="222">T̄ → 0,95·0,96=0,912</text>
+          </svg>
+        </div>
+        <p>Jeder Pfad des Baumdiagramms entspricht per Pfadmultiplikationsregel genau einer Zelle der Vierfeldertafel:
+        \[P(K\cap T)=0{,}05\cdot0{,}94=0{,}047\quad\hat=\quad\frac{47}{1000}\]
+        \[P(\overline K\cap T)=0{,}95\cdot0{,}04=0{,}038\quad\hat=\quad\frac{38}{1000}\]
+        Die Summe der beiden T-Pfade ergibt \(P(T)=0{,}047+0{,}038=0{,}085\) — exakt der Wert aus Teilaufgabe b.</p>
+        <div class="result">Baumdiagramm und Vierfeldertafel liefern identische Werte — nur die Darstellung unterscheidet sich.</div>
+        <p class="note">Umkehrung: Aus der Vierfeldertafel liest man die erste Verzweigung direkt an den Randsummen ab (K: 50/1000, K̄: 950/1000), die zweite Verzweigung ergibt sich als bedingte Wahrscheinlichkeit aus den Zellen einer Zeile, z. B. \(P(T\mid K)=\frac{47}{50}=0{,}94\).</p>
+      </div>
+    </details>
+  </div>
+  <a class="backlink" href="#top">↑ Zur Übersicht</a>
+</section>
+
+</main>
+<footer>Alle Ergebnisse mit exakter Rechnung (sympy) gegengeprüft.</footer>
+</div>
+</body>
+</html>
